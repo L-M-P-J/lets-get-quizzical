@@ -1,11 +1,13 @@
 
 import { Routes, Route} from 'react-router-dom';
+import firebase from './firebase';
 import './App.css';
 import Header from './Header';
 import SavedGames from './SavedGames';
 import NewGameForm from './NewGameForm';
 import { useEffect } from 'react';
 import axios from 'axios';
+import { getDatabase, ref, onValue, push } from 'firebase/database';
 
 function App() {
 
@@ -16,7 +18,11 @@ function App() {
       dataResponse: 'json',
     }).then((response) => {
       console.log(response.data.trivia_categories);
+    
     });
+
+   
+ 
   }, []);
 
   useEffect(() => {
@@ -31,6 +37,9 @@ function App() {
       }
     }).then((response) => {
       console.log(response.data.results[0]);
+      const database = getDatabase(firebase);
+      const dbRef = ref(database);
+      push(dbRef, response.data.results);
     });
   }, []);
 
@@ -50,3 +59,4 @@ function App() {
 }
 
 export default App;
+
