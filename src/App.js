@@ -5,11 +5,16 @@ import './App.css';
 import Header from './Header';
 import SavedGames from './SavedGames';
 import NewGameForm from './NewGameForm';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { getDatabase, ref, onValue, push } from 'firebase/database';
 
 function App() {
+
+  const [ categories, setCategories ] = useState([]);
+  const [ numberChoice, setNumberChoice ] = useState(1);
+  const [ categoryChoice, setCategoryChoice ] = useState('')
+
 
   useEffect( () => {
     axios({
@@ -17,22 +22,19 @@ function App() {
       method: 'GET',
       dataResponse: 'json',
     }).then((response) => {
-      console.log(response.data.trivia_categories);
-    
+      setCategories(response.data.trivia_categories);
+      // console.log(response.data.trivia_categories[0]);
     });
-
-   
- 
   }, []);
 
   useEffect(() => {
     axios({
       url: 'https://opentdb.com/api.php',
       method: 'GET',
-      dataResponse: "json",
+      dataResponse: 'json',
       params: {
-        category: 9,
-        amount: 10,
+        category: categoryChoice,
+        amount: numberChoice,
         type: 'multiple'
       }
     }).then((response) => {
@@ -47,10 +49,9 @@ function App() {
     <div className="App">
       
       <Header />
-
-
+      
       <Routes>
-        <Route path="/newgame" element={ <NewGameForm />}/>
+        <Route path="/newgame" element={ <NewGameForm categoriesData={categories} numberChoice={numberChoice} setNumberChoice={setNumberChoice} setCategoryChoice={setCategoryChoice} categoryChoice={categoryChoice} />}/>
         <Route path="/savedgames" element={ <SavedGames />}/>
       </Routes>
       

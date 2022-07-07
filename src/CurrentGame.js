@@ -1,6 +1,14 @@
 const CurrentGame = () => {
     return (
-        <p>I am the current game!</p>
+        <section>
+            <p>I am the current game!</p>
+            {/* radio buttons */}
+            <form action="">
+                    <fieldset>
+                        <legend></legend>
+                    </fieldset>
+            </form>
+        </section>
     )
 }
 
