@@ -1,21 +1,20 @@
 
 import { Routes, Route} from 'react-router-dom';
-import firebase from './firebase';
+// import firebase from './firebase';
 import './App.css';
 import Header from './Header';
 import SavedGames from './SavedGames';
 import NewGameForm from './NewGameForm';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { getDatabase, ref, onValue, push } from 'firebase/database';
+// import { getDatabase, ref, onValue, push } from 'firebase/database';
 
 function App() {
 
   const [ categories, setCategories ] = useState([]);
-  const [ numberChoice, setNumberChoice ] = useState(1);
-  const [ categoryChoice, setCategoryChoice ] = useState('')
+  const [results, setResults] = useState([]);
 
-
+  console.log(results);
   useEffect( () => {
     axios({
       url: 'https://opentdb.com/api_category.php',
@@ -27,23 +26,24 @@ function App() {
     });
   }, []);
 
-  useEffect(() => {
-    axios({
-      url: 'https://opentdb.com/api.php',
-      method: 'GET',
-      dataResponse: 'json',
-      params: {
-        category: categoryChoice,
-        amount: numberChoice,
-        type: 'multiple'
-      }
-    }).then((response) => {
-      console.log(response.data.results[0]);
-      const database = getDatabase(firebase);
-      const dbRef = ref(database);
-      push(dbRef, response.data.results);
-    });
-  }, []);
+  // useEffect(() => {
+  //   axios({
+  //     url: 'https://opentdb.com/api.php',
+  //     method: 'GET',
+  //     dataResponse: 'json',
+  //     params: {
+  //       category: categoryChoice,
+  //       amount: numberChoice,
+  //       type: 'multiple'
+  //     }
+  //   }).then((response) => {
+  //     setResults(response.data.results);
+  //     console.log(results);
+  //     // const database = getDatabase(firebase);
+  //     // const dbRef = ref(database);
+  //     // push(dbRef, response.data.results);
+  //   });
+  // }, []);
 
   return (
     <div className="App">
@@ -51,7 +51,7 @@ function App() {
       <Header />
       
       <Routes>
-        <Route path="/newgame" element={ <NewGameForm categoriesData={categories} numberChoice={numberChoice} setNumberChoice={setNumberChoice} setCategoryChoice={setCategoryChoice} categoryChoice={categoryChoice} />}/>
+        <Route path="/newgame" element={ <NewGameForm categoriesData={categories} setResults={setResults}/>}/>
         <Route path="/savedgames" element={ <SavedGames />}/>
       </Routes>
       
