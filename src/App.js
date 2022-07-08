@@ -17,6 +17,7 @@ function App() {
   const [results, setResults] = useState([]);
 
   console.log(results);
+  
   useEffect( () => {
     axios({
       url: 'https://opentdb.com/api_category.php',
@@ -24,7 +25,7 @@ function App() {
       dataResponse: 'json',
     }).then((response) => {
       setCategories(response.data.trivia_categories);
-      // console.log(response.data.trivia_categories[0]);
+      // console.log(response.data.trivia_categories);
     });
   }, []);
 
@@ -52,7 +53,7 @@ function App() {
   
       <Routes>
         <Route path="/" element={<Header />}/>
-        <Route path="/newgame" element={ <NewGameForm categoriesData={categories} setResults={setResults}/>}/>
+        <Route path="/newgame" element={ <NewGameForm categoriesData={categories} setResults={setResults} results={results}/>}/>
         <Route path="/savedgames" element={ <SavedGames />}/>
         <Route path="/currentGame" element={<CurrentGame/>}/>
       </Routes>
