@@ -3,8 +3,18 @@ import { Link } from "react-router-dom";
 const Header = () => {
     return (
         <header>
-            <Link className="gameButton" to="/newgame">New Game</Link>
-            <Link className="gameButton" to="/savedgames">Saved Games</Link>
+            <div className="wrapper">
+                <div className="triangleUp triangleOne"></div>
+                <div className="triangleUp triangleTwo"></div>
+                <div className="triangleUp triangleThree"></div>
+                <div className="headerContainer">
+                    <h1>lets get quizzical</h1>
+                    <div className="buttonContainer">
+                        <Link className="gameButton" to="/newgame">New Game</Link>
+                        <Link className="gameButton" to="/savedgames">Saved Games</Link>
+                    </div>
+                </div>
+            </div>
         </header>
     )
 }

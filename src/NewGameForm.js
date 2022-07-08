@@ -1,8 +1,12 @@
-import { useState } from 'react';
+import { useState} from 'react';
+import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 const NewGameForm = (props) => {
 
-    const { categoriesData, setCategoryChoice, setNumberChoice, numberChoice, categoryChoice } = props;
+    const { categoriesData, setResults} = props;
+    const [ numberChoice, setNumberChoice ] = useState(1);
+    const [ categoryChoice, setCategoryChoice ] = useState('');
     
     const handleNumberChange = (event) => {
         setNumberChoice(event.target.value);
@@ -12,12 +16,32 @@ const NewGameForm = (props) => {
         setCategoryChoice(event.target.value);
     }
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        axios({
+            url: 'https://opentdb.com/api.php',
+            method: 'GET',
+            dataResponse: 'json',
+            params: {
+            category: categoryChoice,
+            amount: numberChoice,
+            type: 'multiple'
+        }
+        }).then((response) => {
+            setResults(response.data.results);
+            // console.log(results);
+            // const database = getDatabase(firebase);
+            // const dbRef = ref(database);
+            // push(dbRef, response.data.results);
+        });
+    }
+
     return (
         <section>
             
-            <form action="">
+            <form action="" onSubmit={handleSubmit}>
                 <label htmlFor="category">Select Category:</label>
-                <select name="category" id="category">
+                <select name="category" id="category" onChange={handleCategoryChange}>
                     {
                         categoriesData.map((category) => {
                             return(
@@ -39,8 +63,8 @@ const NewGameForm = (props) => {
                     onChange={ handleNumberChange }
                     value={numberChoice}
                 />
-
-                <button type="submit">Submit</button>
+                <Link to="/"><i className="fa-solid fa-arrow-left"></i></Link>
+                <button type="submit"><Link to="/currentGame">Submit</Link></button>
             </form>
 
         </section>
