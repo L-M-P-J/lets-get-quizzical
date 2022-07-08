@@ -20,7 +20,7 @@ const NewGameForm = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        navigate('/currentgame');
+        
         axios({
             url: 'https://opentdb.com/api.php',
             method: 'GET',
@@ -32,6 +32,9 @@ const NewGameForm = (props) => {
             }
         }).then((response) => {  
             setResults(response.data.results);
+            
+        }).then(() => {
+            navigate('/currentgame');
         });
     }
 
