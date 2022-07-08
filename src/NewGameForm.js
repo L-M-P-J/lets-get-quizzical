@@ -9,7 +9,6 @@ const NewGameForm = (props) => {
     const { categoriesData, setResults, results} = props;
     const [ numberChoice, setNumberChoice ] = useState(1);
     const [ categoryChoice, setCategoryChoice ] = useState('');
-    const [ isClicked, setIsClicked ] = useState(false);
 
     const navigate = useNavigate();
 
@@ -40,12 +39,11 @@ const NewGameForm = (props) => {
     //         const dbRef = ref(database);
     //         push(dbRef, results);
     //     });
-    // }, [isClicked])
+    // }, [])
 
     const handleSubmit = (event) => {
         console.log('clicked');
         event.preventDefault();
-        setIsClicked(!isClicked);
         console.log('submited');
         navigate('/currentgame');
         axios({
@@ -59,10 +57,17 @@ const NewGameForm = (props) => {
             }
         }).then((response) => {  
             setResults(response.data.results);
-            console.log(response.data.results);
-
         });
     }
+
+
+// useEffect(() => {
+//     console.log('loaded');
+//     console.log(results);
+//     const database = getDatabase(firebase);
+//     const dbRef = ref(database);
+//     push(dbRef, results);
+// }, [results]);
 
     return (
         <section>
