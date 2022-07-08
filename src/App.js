@@ -7,6 +7,7 @@ import SavedGames from './SavedGames';
 import NewGameForm from './NewGameForm';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Footer from './Footer';
 // import { getDatabase, ref, onValue, push } from 'firebase/database';
 
 function App() {
@@ -54,7 +55,7 @@ function App() {
         <Route path="/newgame" element={ <NewGameForm categoriesData={categories} setResults={setResults}/>}/>
         <Route path="/savedgames" element={ <SavedGames />}/>
       </Routes>
-      
+      <Footer/>
     </div>
   );
 }
