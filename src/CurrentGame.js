@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 const CurrentGame = (props) => {
 
     const { resultsData } = props;
@@ -24,12 +24,41 @@ const CurrentGame = (props) => {
                 //     arr.splice(randInd, 0, corr)
                     // }
 
-    //  *** Remember to make an END component for the game
-    
-    const answerArray = [...resultsData[currentQuestion].incorrect_answers];
+                    
 
-    answerArray.push(resultsData[currentQuestion].correct_answer);
+    // NEXT STEPS:
+    // Put random answers from answer array on the page
+    // NewGameForm - add the game name input field - connect that to firebase 
+    //  Make an END component for the game after the last question (logic using < .length of the array)
+    // Saved Games - display firebase data on the page *Mel*
+        // Include Routing variable 
+
+    useEffect(() => {
+
+        const answerArray = [...resultsData[currentQuestion].incorrect_answers];
+        console.log(answerArray);
+    
+        const correctAnswer = resultsData[currentQuestion].correct_answer;
+        console.log(correctAnswer);
+    
+        // answerArray.push(correctAnswer);
+    
+        function combineAnswer(arr, corr) {
+            const randInd = Math.floor(Math.random()*4)
+            return arr.splice(randInd, 0, corr)
+        }
+        
+        combineAnswer(answerArray, correctAnswer);
+        console.log(answerArray);
+        
+        
+    }, []);
+
+    // let shuffledNumbers = answerArray.sort(function() {
+    //     return Math.random() - 0.5;
+    // })
     // console.log(answerArray);
+    // console.log(shuffledNumbers);
 
     const handleSubmit = (event) => {
         console.log(event.target);
@@ -40,6 +69,7 @@ const CurrentGame = (props) => {
         setChecked2(false);
         setChecked3(false);
         console.log(userAnswer);
+
     }
 
     const handleUserInput0 = (event) => {
