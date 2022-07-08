@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom';
 const CurrentGame = () => {
     return (
         <section>
@@ -8,6 +9,7 @@ const CurrentGame = () => {
                         <legend></legend>
                     </fieldset>
             </form>
+            <Link to="/"><i className="fa-solid fa-arrow-left"></i></Link>
         </section>
     )
 }

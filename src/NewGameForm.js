@@ -9,6 +9,7 @@ const NewGameForm = (props) => {
     const { categoriesData, setResults, results} = props;
     const [ numberChoice, setNumberChoice ] = useState(1);
     const [ categoryChoice, setCategoryChoice ] = useState('');
+    const [ isClicked, setIsClicked ] = useState(false);
 
     const navigate = useNavigate();
 
@@ -22,7 +23,31 @@ const NewGameForm = (props) => {
         setCategoryChoice(event.target.value);
     }
 
-    useEffect( () => {
+    // useEffect( () => {
+    //     axios({
+    //         url: 'https://opentdb.com/api.php',
+    //         method: 'GET',
+    //         dataResponse: 'json',
+    //         params: {
+    //             category: categoryChoice,
+    //             amount: numberChoice,
+    //             type: 'multiple'
+    //         }
+    //     }).then((response) => {  
+    //         setResults(response.data.results);
+    //                 console.log('async');
+    //         const database = getDatabase(firebase);
+    //         const dbRef = ref(database);
+    //         push(dbRef, results);
+    //     });
+    // }, [isClicked])
+
+    const handleSubmit = (event) => {
+        console.log('clicked');
+        event.preventDefault();
+        setIsClicked(!isClicked);
+        console.log('submited');
+        navigate('/currentgame');
         axios({
             url: 'https://opentdb.com/api.php',
             method: 'GET',
@@ -33,18 +58,10 @@ const NewGameForm = (props) => {
                 type: 'multiple'
             }
         }).then((response) => {  
+            setResults(response.data.results);
             console.log(response.data.results);
-            console.log(results);
-            const database = getDatabase(firebase);
-            const dbRef = ref(database);
-            push(dbRef, results);
-            navigate('/currentgame');
-        });
-    }, [results])
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        setResults(response.data.results);
+        });
     }
 
     return (
