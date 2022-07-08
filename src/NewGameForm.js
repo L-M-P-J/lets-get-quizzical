@@ -1,18 +1,14 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import firebase from './firebase';
-import { getDatabase, ref, onValue, push } from 'firebase/database';
 
 const NewGameForm = (props) => {
 
-    const { categoriesData, setResults, results} = props;
+    const { categoriesData, setResults} = props;
     const [ numberChoice, setNumberChoice ] = useState(1);
     const [ categoryChoice, setCategoryChoice ] = useState('');
 
     const navigate = useNavigate();
-
-    // const gameName = 'fun game';
     
     const handleNumberChange = (event) => {
         setNumberChoice(event.target.value);
@@ -22,29 +18,8 @@ const NewGameForm = (props) => {
         setCategoryChoice(event.target.value);
     }
 
-    // useEffect( () => {
-    //     axios({
-    //         url: 'https://opentdb.com/api.php',
-    //         method: 'GET',
-    //         dataResponse: 'json',
-    //         params: {
-    //             category: categoryChoice,
-    //             amount: numberChoice,
-    //             type: 'multiple'
-    //         }
-    //     }).then((response) => {  
-    //         setResults(response.data.results);
-    //                 console.log('async');
-    //         const database = getDatabase(firebase);
-    //         const dbRef = ref(database);
-    //         push(dbRef, results);
-    //     });
-    // }, [])
-
     const handleSubmit = (event) => {
-        console.log('clicked');
         event.preventDefault();
-        console.log('submited');
         navigate('/currentgame');
         axios({
             url: 'https://opentdb.com/api.php',
@@ -59,15 +34,6 @@ const NewGameForm = (props) => {
             setResults(response.data.results);
         });
     }
-
-
-// useEffect(() => {
-//     console.log('loaded');
-//     console.log(results);
-//     const database = getDatabase(firebase);
-//     const dbRef = ref(database);
-//     push(dbRef, results);
-// }, [results]);
 
     return (
         <section>
