@@ -1,6 +1,6 @@
 
 import { Routes, Route} from 'react-router-dom';
-// import firebase from './firebase';
+import firebase from './firebase';
 import './App.css';
 import Header from './Header';
 import SavedGames from './SavedGames';
@@ -9,15 +9,13 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Footer from './Footer';
 import CurrentGame from './CurrentGame';
-// import { getDatabase, ref, onValue, push } from 'firebase/database';
+import { getDatabase, ref, onValue, push } from 'firebase/database';
 
 function App() {
 
   const [ categories, setCategories ] = useState([]);
   const [results, setResults] = useState([]);
-
   console.log(results);
-  
   useEffect( () => {
     axios({
       url: 'https://opentdb.com/api_category.php',
@@ -29,24 +27,12 @@ function App() {
     });
   }, []);
 
-  // useEffect(() => {
-  //   axios({
-  //     url: 'https://opentdb.com/api.php',
-  //     method: 'GET',
-  //     dataResponse: 'json',
-  //     params: {
-  //       category: categoryChoice,
-  //       amount: numberChoice,
-  //       type: 'multiple'
-  //     }
-  //   }).then((response) => {
-  //     setResults(response.data.results);
-  //     console.log(results);
-  //     // const database = getDatabase(firebase);
-  //     // const dbRef = ref(database);
-  //     // push(dbRef, response.data.results);
-  //   });
-  // }, []);
+  useEffect( () => {
+    console.log(results);
+    const database = getDatabase(firebase);
+    const dbRef = ref(database);
+    push(dbRef, results);
+  }, [results]);
 
   return (
     <div className="App">
@@ -58,6 +44,7 @@ function App() {
         <Route path="/currentGame" element={<CurrentGame/>}/>
       </Routes>
       <Footer/>
+
     </div>
   );
 }

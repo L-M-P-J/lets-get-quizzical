@@ -1,18 +1,14 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import firebase from './firebase';
-import { getDatabase, ref, onValue, push } from 'firebase/database';
 
 const NewGameForm = (props) => {
 
-    const { categoriesData, setResults, results} = props;
+    const { categoriesData, setResults} = props;
     const [ numberChoice, setNumberChoice ] = useState(1);
     const [ categoryChoice, setCategoryChoice ] = useState('');
 
     const navigate = useNavigate();
-
-    // const gameName = 'fun game';
     
     const handleNumberChange = (event) => {
         setNumberChoice(event.target.value);
@@ -22,7 +18,9 @@ const NewGameForm = (props) => {
         setCategoryChoice(event.target.value);
     }
 
-    useEffect( () => {
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        navigate('/currentgame');
         axios({
             url: 'https://opentdb.com/api.php',
             method: 'GET',
@@ -33,18 +31,8 @@ const NewGameForm = (props) => {
                 type: 'multiple'
             }
         }).then((response) => {  
-            console.log(response.data.results);
-            console.log(results);
-            const database = getDatabase(firebase);
-            const dbRef = ref(database);
-            push(dbRef, results);
-            navigate('/currentgame');
+            setResults(response.data.results);
         });
-    }, [results])
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        setResults(response.data.results);
     }
 
     return (
