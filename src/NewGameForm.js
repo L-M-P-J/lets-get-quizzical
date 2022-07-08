@@ -1,5 +1,6 @@
 import { useState} from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 const NewGameForm = (props) => {
 
@@ -62,8 +63,8 @@ const NewGameForm = (props) => {
                     onChange={ handleNumberChange }
                     value={numberChoice}
                 />
-
-                <button type="submit">Submit</button>
+                <Link to="/"><i className="fa-solid fa-arrow-left"></i></Link>
+                <button type="submit"><Link to="/currentGame">Submit</Link></button>
             </form>
 
         </section>
