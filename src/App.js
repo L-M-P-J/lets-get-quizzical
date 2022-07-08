@@ -32,6 +32,7 @@ function App() {
     const database = getDatabase(firebase);
     const dbRef = ref(database);
     push(dbRef, results);
+    console.log(results)
   }, [results]);
 
   return (
@@ -41,7 +42,7 @@ function App() {
         <Route path="/" element={<Header />}/>
         <Route path="/newgame" element={ <NewGameForm categoriesData={categories} setResults={setResults} results={results}/>}/>
         <Route path="/savedgames" element={ <SavedGames />}/>
-        <Route path="/currentGame" element={<CurrentGame/>}/>
+        <Route path="/currentGame" element={<CurrentGame resultsData={results}/>}/>
       </Routes>
       <Footer/>
 
