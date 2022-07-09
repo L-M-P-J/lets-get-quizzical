@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const NewGameForm = (props) => {
 
-    const { categoriesData, setResults} = props;
+    const { categoriesData, setResults, setGameName } = props;
     const [ numberChoice, setNumberChoice ] = useState(1);
     const [ categoryChoice, setCategoryChoice ] = useState('');
 
@@ -16,6 +16,10 @@ const NewGameForm = (props) => {
 
     const handleCategoryChange = (event) => {
         setCategoryChoice(event.target.value);
+    }
+
+    const handleNameChange = (event) => {
+        setGameName(event.target.value);
     }
 
     const handleSubmit = (event) => {
@@ -34,7 +38,7 @@ const NewGameForm = (props) => {
             setResults(response.data.results);
             
         }).then(() => {
-            navigate('/currentgame');
+            navigate('/currentgame/');
         });
     }
 
@@ -42,6 +46,10 @@ const NewGameForm = (props) => {
         <section>
             
             <form action="" onSubmit={handleSubmit}>
+
+                <label htmlFor="gameName">Name your game!</label>
+                <input type="text" id="gameName" placeholder="Dua Lipa" onChange={handleNameChange}/>
+
                 <label htmlFor="category">Select Category:</label>
                 <select name="category" id="category" onChange={handleCategoryChange}>
                     {
