@@ -9,8 +9,8 @@ const NewGameForm = (props) => {
     const { categoriesData, setResults } = props;
     const [ numberChoice, setNumberChoice ] = useState(1);
     const [ categoryChoice, setCategoryChoice ] = useState('');
-    const [gameId, setGameId] = useState('');
-    const [gameName, setGameName] = useState('');
+    const [ gameId, setGameId ] = useState('');
+    const [ gameName, setGameName ] = useState('');
 
     const navigate = useNavigate();
 

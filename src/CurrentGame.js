@@ -1,7 +1,8 @@
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import firebase from './firebase';
 import { getDatabase, onValue, ref } from 'firebase/database';
+import EndOfGame from './EndOfGame';
 
 const CurrentGame = () => {
 
@@ -17,12 +18,15 @@ const CurrentGame = () => {
     const [allAnswersArray, setAllAnswersArray] = useState([]);
     const [currentCorrectAns, setCurrentCorrectAns] = useState('');
     const [resultsData, setResultsData] = useState([]);
+    const [ isClicked, setIsClicked ] = useState(false);
 
     useEffect( () => {
         const database = getDatabase(firebase);
         const dbRef = ref(database, `/${gameId}`);
         onValue(dbRef, (response) => {
             const data = response.val();
+            console.log(data);
+            
             setResultsData(data);
 
             const answerArray = [...data.gameData[currentQuestion].incorrect_answers];
@@ -58,7 +62,14 @@ const CurrentGame = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        setCurrentQuestion(currentQuestion+1);
+        console.log(resultsData);
+
+        if (resultsData.gameData.length - 1 === currentQuestion) {
+            return;
+        } else {
+             setCurrentQuestion(currentQuestion+1);
+        }
+       
         setChecked0(false);
         setChecked1(false);
         setChecked2(false);
@@ -89,13 +100,18 @@ const CurrentGame = () => {
     const handleClick = (event) => {
         setUserAnswer(event.target.value);
     }
+
+    const handleShowScore = () => {
+        setIsClicked(!isClicked);
+    }
     
     if (resultsData.length < 1) {
         return (
             <p>Game is loading</p>
         )
     } else {
-
+        
+        
         return (
             <section>
                 <form onSubmit={handleSubmit}>
@@ -112,15 +128,21 @@ const CurrentGame = () => {
 
                     <label htmlFor='option4'>{allAnswersArray[3]}</label>
                     <input id='option4' onClick={handleClick} onChange={handleUserInput3} type='radio' name='answer' value={allAnswersArray[3]} checked={checked3}></input>
+                    
+                    {
+                        resultsData.gameData.length - 1 === currentQuestion ? <button onClick={ handleShowScore }>Show my score</button>
+                        : <button type='submit' >Next Question</button>
+                    }
 
-                    <button type='submit' >Next Question</button>
-            
+                    {
+                        isClicked ? <EndOfGame score={score} resultsData={resultsData}/>
+                        : null
+                    }
                 </fieldset>
             </form>
 
-            <p>{score}/{resultsData.gameData.length}</p>
 
-                <Link to="/"><i className="fa-solid fa-arrow-left"></i></Link>
+            
             </section>
         )
     }
