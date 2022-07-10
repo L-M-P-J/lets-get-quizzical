@@ -1,15 +1,19 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import firebase from './firebase';
+import { getDatabase, ref, push, onValue} from 'firebase/database';
 
 const NewGameForm = (props) => {
 
-    const { categoriesData, setResults, setGameName } = props;
+    const { categoriesData, setResults } = props;
     const [ numberChoice, setNumberChoice ] = useState(1);
     const [ categoryChoice, setCategoryChoice ] = useState('');
+    const [gameId, setGameId] = useState('');
+    const [gameName, setGameName] = useState('');
 
     const navigate = useNavigate();
-    
+
     const handleNumberChange = (event) => {
         setNumberChoice(event.target.value);
     }
@@ -24,7 +28,8 @@ const NewGameForm = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        
+        const database = getDatabase(firebase);
+        const dbRef = ref(database);
         axios({
             url: 'https://opentdb.com/api.php',
             method: 'GET',
@@ -35,12 +40,21 @@ const NewGameForm = (props) => {
                 type: 'multiple'
             }
         }).then((response) => {  
-            setResults(response.data.results);
-            
+            const gameData = response.data.results;
+            setResults(gameData);
+            push(dbRef, { gameData, name: gameName });
         }).then(() => {
-            navigate('/currentgame/');
+            onValue(dbRef, (response) => {
+                const data = response.val();
+                const lastKey = Object.keys(data).pop();
+                setGameId(lastKey);
+                navigate(`/currentgame/${lastKey}`);
+            })
         });
     }
+
+    console.log(gameId);
+    console.clear();
 
     return (
         <section>
