@@ -5,9 +5,9 @@ import { getDatabase, onValue, ref } from 'firebase/database';
 
 const CurrentGame = (props) => {
 
-    const {gameKey} = useParams();
+    const {gameId} = useParams();
 
-    const { resultsData } = props;
+    // const { resultsData } = props;
     const [ currentQuestion, setCurrentQuestion ] = useState(0);
     const [ score, setScore ] = useState(0);
     const [ userAnswer, setUserAnswer ] = useState('');
@@ -17,39 +17,59 @@ const CurrentGame = (props) => {
     const [ checked3, setChecked3 ] = useState(false);
     const [allAnswersArray, setAllAnswersArray] = useState([]);
     const [currentCorrectAns, setCurrentCorrectAns] = useState('');
+    const [currentGame, setCurrentGame] = useState('');
+    const [resultsData, setResultsData] = useState([]);
 
-    //when we load this page, we need to go into firebase, choose the last object (the most current game) and use that to diplay stuff on the page (in the return() in this component)
+    useEffect( () => {
+        const database = getDatabase(firebase);
+        const dbRef = ref(database, `/${gameId}`);
+        onValue(dbRef, (response) => {
+            const data = response.val();
+            console.log(data);
+            setResultsData(data);
 
-    // useEffect( () => {
-    //     const database = getDatabase(firebase);
-    //     const dbRef = ref(database);
-    //     onValue(dbRef, (response) => {
-    //         for (let game in data) {
-    //         }
-    //     })
-    // }, [])
+            const answerArray = [...data.gameData[currentQuestion].incorrect_answers];
+            const correctAnswer = data.gameData[currentQuestion].correct_answer;
+            setCurrentCorrectAns(correctAnswer);
+            function combineAnswer(arr, corr) {
+                const randInd = Math.floor(Math.random() * 4)
+                return arr.splice(randInd, 0, corr)
+            }
+            combineAnswer(answerArray, correctAnswer);
+            setAllAnswersArray(answerArray);
+            // for (let game in data) {
+            //     console.log(game);
+            // }
+        })
+    }, [])
 
     useEffect(() => {
 
-        const answerArray = [...resultsData[currentQuestion].incorrect_answers];
-    
-        const correctAnswer = resultsData[currentQuestion].correct_answer;
-        setCurrentCorrectAns(correctAnswer);
-    
-        function combineAnswer(arr, corr) {
-            const randInd = Math.floor(Math.random()*4)
-            return arr.splice(randInd, 0, corr)
+        console.log(resultsData);
+
+        if (currentQuestion) {
+            const answerArray = [...resultsData.gameData[currentQuestion].incorrect_answers];
+
+            const correctAnswer = resultsData.gameData[currentQuestion].correct_answer;
+            setCurrentCorrectAns(correctAnswer);
+
+            function combineAnswer(arr, corr) {
+                const randInd = Math.floor(Math.random() * 4)
+                return arr.splice(randInd, 0, corr)
+            }
+
+            combineAnswer(answerArray, correctAnswer);
+
+            setAllAnswersArray(answerArray);
         }
         
-        combineAnswer(answerArray, correctAnswer);
-        
-        setAllAnswersArray(answerArray);
 
     }, [currentQuestion]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
         setCurrentQuestion(currentQuestion+1);
+        console.log(currentQuestion);
         setChecked0(false);
         setChecked1(false);
         setChecked2(false);
@@ -59,6 +79,19 @@ const CurrentGame = (props) => {
         } else {
             console.log('WRONG WRONG SO WRONG');
         }
+        
+
+        // const answerArray = [...resultsData.gameData[currentQuestion].incorrect_answers];
+        // const correctAnswer = resultsData.gameData[currentQuestion].correct_answer;
+        // setCurrentCorrectAns(correctAnswer);
+        // function combineAnswer(arr, corr) {
+        //     const randInd = Math.floor(Math.random()*4)
+        //     return arr.splice(randInd, 0, corr)
+        // }
+        // combineAnswer(answerArray, correctAnswer);
+        // setAllAnswersArray(answerArray);
+
+
     }
 
     const handleUserInput0 = (event) => {
@@ -80,12 +113,18 @@ const CurrentGame = (props) => {
     const handleClick = (event) => {
         setUserAnswer(event.target.value);
     }
+    
+    if (resultsData.length < 1) {
+        return (
+            <p>Game is loading</p>
+        )
+    } else {
 
-    return (
-        <section>
-            <form onSubmit={handleSubmit}>
+        return (
+            <section>
+                <form onSubmit={handleSubmit}>
                 <fieldset>
-                <legend>{resultsData[currentQuestion].question}</legend>
+                <legend>{resultsData.gameData[currentQuestion].question}</legend>
                     <label htmlFor='Mel'>{allAnswersArray[0]}</label>
                     <input onClick={handleClick} onChange={handleUserInput0} type='radio' name='answer' value={allAnswersArray[0]} checked={checked0}></input>
 
@@ -103,11 +142,13 @@ const CurrentGame = (props) => {
                 </fieldset>
             </form>
 
-            <p>{score}/{resultsData.length}</p>
+            <p>{score}/{resultsData.gameData.length}</p>
 
-            <Link to="/"><i className="fa-solid fa-arrow-left"></i></Link>
-        </section>
-    )
+                <Link to="/"><i className="fa-solid fa-arrow-left"></i></Link>
+            </section>
+        )
+    }
+    
 }
 
 export default CurrentGame;

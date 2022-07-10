@@ -30,7 +30,6 @@ function App() {
 
   const [ categories, setCategories ] = useState([]);
   const [results, setResults] = useState([]);
-  const [gameName, setGameName] = useState('');
 
   useEffect( () => {
     axios({
@@ -42,24 +41,21 @@ function App() {
     });
   }, []);
 
-  useEffect( () => {
-    const database = getDatabase(firebase);
-    const dbRef = ref(database);
-    push(dbRef, { results, key: uuid(), name: gameName });
-    onValue(dbRef, (response) => {
-      const data = response.val();
-    }
-    )
-}, [results]);
+//   useEffect( () => {
+//     const database = getDatabase(firebase);
+//     const dbRef = ref(database);
+//     const newGameRef = push(dbRef, { results, key: uuid(), name: gameName });
+//     setGameId(newGameRef.key)
+// }, [results]);
 
   return (
     <div className="App">
   
       <Routes>
         <Route path="/" element={<Header />}/>
-        <Route path="/newgame" element={ <NewGameForm categoriesData={categories} setResults={setResults} results={results} setGameName={setGameName}/>}/>
+        <Route path="/newgame" element={<NewGameForm categoriesData={categories} setResults={setResults} results={results}/>}/>
         <Route path="/savedgames" element={ <SavedGames />}/>
-        <Route path="/currentGame" element={<CurrentGame resultsData={results}/>}/>
+        <Route path="/currentGame/:gameId" element={<CurrentGame />}/>
       </Routes>
       <Footer/>
 
