@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import firebase from './firebase';
 import { getDatabase, ref, push, onValue} from 'firebase/database';
 
@@ -42,16 +42,10 @@ const NewGameForm = (props) => {
         }).then((response) => {  
             const gameData = response.data.results;
             setResults(gameData);
-            // const database = getDatabase(firebase);
-            // const dbRef = ref(database);
-            console.log(dbRef);
-            const newGameRef = push(dbRef, { gameData, name: gameName });
-            console.log(newGameRef);
-            // setGameId(newGameRef.key)
+            push(dbRef, { gameData, name: gameName });
         }).then(() => {
             onValue(dbRef, (response) => {
                 const data = response.val();
-                // console.log(data.key);
                 const lastKey = Object.keys(data).pop();
                 setGameId(lastKey);
                 navigate(`/currentgame/${lastKey}`);
@@ -59,12 +53,8 @@ const NewGameForm = (props) => {
         });
     }
 
-    //   useEffect( () => {
-//     const database = getDatabase(firebase);
-//     const dbRef = ref(database);
-//     const newGameRef = push(dbRef, { results, key: uuid(), name: gameName });
-//     setGameId(newGameRef.key)
-// }, [results]);
+    console.log(gameId);
+    console.clear();
 
     return (
         <section>
