@@ -34,7 +34,7 @@ function App() {
       console.log(categories);
       console.log(slicedCategories);
     });
-  }, []);
+  }, [categories]);
 
   return (
     <div className="App">
@@ -53,3 +53,14 @@ function App() {
 
 export default App;
 
+/*
+
+  TO-DO FOR TONIGHT
+
+    1. Modal & Google Chrome Issue - Lester
+    2. Research for replacing regex, audio - Pau
+    3. Current Games - Joey
+    4. Saved Games - Mel
+
+
+*/

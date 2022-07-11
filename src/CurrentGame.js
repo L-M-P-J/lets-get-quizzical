@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import firebase from './firebase';
 import { getDatabase, onValue, ref } from 'firebase/database';
 import EndOfGame from './EndOfGame';
+import Modal from './Modal';
 
 const CurrentGame = () => {
 
@@ -19,6 +20,8 @@ const CurrentGame = () => {
     const [currentCorrectAns, setCurrentCorrectAns] = useState('');
     const [resultsData, setResultsData] = useState([]);
     const [ isClicked, setIsClicked ] = useState(false);
+    const [ isModalOn, setIsModalOn ] = useState(false);
+    // const [ modalQuestion, setModalQuestion] = useState(0);
 
     useEffect( () => {
         const database = getDatabase(firebase);
@@ -61,7 +64,6 @@ const CurrentGame = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-
         if (resultsData.gameData.length - 1 === currentQuestion) {
             return;
         } else {
@@ -74,7 +76,7 @@ const CurrentGame = () => {
         if (userAnswer === currentCorrectAns) {
             setScore(score + 1);
         } else {
-            console.log('WRONG WRONG SO WRONG');
+            setIsModalOn(true);
         }
     }
 
@@ -99,67 +101,49 @@ const CurrentGame = () => {
     }
 
     const handleShowScore = () => {
-        // setIsClicked(true);
-        // if (userAnswer === currentCorrectAns) {
-        //     setScore(score + 1);
-        // } else {
-        //     console.log('WRONG WRONG SO WRONG');
-        // }
         if (isClicked === false) {
             if (userAnswer === currentCorrectAns) {
                 setScore(score + 1);
             } else {
-                console.log('WRONG WRONG SO WRONG');
+                setIsModalOn(true);
             }
         }
         setIsClicked(true);
     }
 
-    /*
-    handleShowScore = function that gets executed by finish button
-
-    we need to find a way to make score only add once after being clicked
-     */
-    
-    // 
     if (resultsData.length < 1) {
         return (
             <p>Game is loading</p>
         )
-    } else {
-        
-        
+    } else {    
         return (
             <section>
-                <form onSubmit={handleSubmit}>
-                <fieldset>
-                <legend>{resultsData.gameData[currentQuestion].question.replace(/&quot;/g, `"`).replace(/&#039;/g, `'`)}</legend>
-                    <label htmlFor='option1'>{allAnswersArray[0].replace(/&quot;/g, `"`).replace(/&#039;/g, `'`)}</label>
-                    <input id='option1' onClick={handleClick} onChange={handleUserInput0} type='radio' name='answer' value={allAnswersArray[0]} checked={checked0} required></input>
-
-                    <label htmlFor='option2'>{allAnswersArray[1].replace(/&quot;/g, `"`).replace(/&#039;/g, `'`)}</label>
-                    <input id='option2' onClick={handleClick} onChange={handleUserInput1} type='radio' name='answer' value={allAnswersArray[1]} checked={checked1} required></input>
-
-                    <label htmlFor='option3'>{allAnswersArray[2].replace(/&quot;/g, `"`).replace(/&#039;/g, `'`)}</label>
-                    <input id='option3' onClick={handleClick} onChange={handleUserInput2} type='radio' name='answer' value={allAnswersArray[2]} checked={checked2} required></input>
-
-                    <label htmlFor='option4'>{allAnswersArray[3].replace(/&quot;/g, `"`).replace(/&#039;/g, `'`)}</label>
-                    <input id='option4' onClick={handleClick} onChange={handleUserInput3} type='radio' name='answer' value={allAnswersArray[3]} checked={checked3} required></input>
+                {
+                    isClicked === false ?                 
                     
-                    {
-                        resultsData.gameData.length - 1 === currentQuestion ? <button onClick={ handleShowScore }>Finish</button>
-                        : <button type='submit' >Next Question</button>
-                    }
+                    <form onSubmit={handleSubmit}>
+                        <fieldset>
+                            <legend>{resultsData.gameData[currentQuestion].question.replace(/&quot;/g, `"`).replace(/&#039;/g, `'`)}</legend>
+                                <label htmlFor='option1'>{allAnswersArray[0].replace(/&quot;/g, `"`).replace(/&#039;/g, `'`)}</label>
+                                <input id='option1' onClick={handleClick} onChange={handleUserInput0} type='radio' name='answer' value={allAnswersArray[0]} checked={checked0} required></input>
 
-                    {
-                        isClicked ? <EndOfGame score={score} resultsData={resultsData}/>
-                        : null
-                    }
-                </fieldset>
-            </form>
+                                <label htmlFor='option2'>{allAnswersArray[1].replace(/&quot;/g, `"`).replace(/&#039;/g, `'`)}</label>
+                                <input id='option2' onClick={handleClick} onChange={handleUserInput1} type='radio' name='answer' value={allAnswersArray[1]} checked={checked1} required></input>
 
+                                <label htmlFor='option3'>{allAnswersArray[2].replace(/&quot;/g, `"`).replace(/&#039;/g, `'`)}</label>
+                                <input id='option3' onClick={handleClick} onChange={handleUserInput2} type='radio' name='answer' value={allAnswersArray[2]} checked={checked2} required></input>
 
-            
+                                <label htmlFor='option4'>{allAnswersArray[3].replace(/&quot;/g, `"`).replace(/&#039;/g, `'`)}</label>
+                                <input id='option4' onClick={handleClick} onChange={handleUserInput3} type='radio' name='answer' value={allAnswersArray[3]} checked={checked3} required></input>
+                                
+                                {
+                                    resultsData.gameData.length - 1 === currentQuestion ? <button onClick={ handleShowScore }>Finish</button>
+                                    : <button type='submit' >Next Question</button>
+                                }
+                        </fieldset>
+                    </form>
+                : <EndOfGame score={score} resultsData={resultsData}/>}
+                {isModalOn ? <Modal setIsModalOn={setIsModalOn} resultsData={resultsData} currentQuestion={currentQuestion} userAnswer={userAnswer}/> : null}
             </section>
         )
     }
