@@ -1,14 +1,23 @@
 import { Link } from 'react-router-dom';
-
+import uuid from 'react-uuid';
 
 const EndOfGame = (props) => {
-
     const { score, resultsData } = props;
+    console.log(resultsData.gameData);
     return (
         <div>
-        <p>Your funal score is:</p>
-        <p>{score}/{resultsData.gameData.length}</p>
-        <Link to="/"><i className="fa-solid fa-arrow-left"></i>Make a new game</Link>
+            <p>Your final score is:</p>
+            <p>{score}/{resultsData.gameData.length}</p>
+            <Link to="/"><i className="fa-solid fa-arrow-left"></i>Make a new game</Link>
+            {
+                resultsData.gameData.map( (item) => {
+                    console.log(item.question.correct_answer);
+                    return  <div key={uuid()}>
+                                <p>{item.question.replace(/&quot;/g, `"`).replace(/&#039;/g, `'`)}</p>
+                                <p>Answer: {item.correct_answer.replace(/&quot;/g, `"`).replace(/&#039;/g, `'`)}</p>
+                            </div>
+                })
+            }
         </div>
     )
 }
