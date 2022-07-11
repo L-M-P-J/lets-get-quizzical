@@ -31,7 +31,7 @@ const SavedGames = () => {
                 return (
                     
                     <li key={game.key}>
-                        <Link to={`/currentGame/:${game.key}`}>
+                        <Link to={`/currentGame/${game.key}`}>
                             <h2>{game.name}</h2>
                             <p>Category:{game.gameData[0].category}</p>
                             {/* error handle for general knowledge or REMOVE */}

@@ -28,7 +28,11 @@ function App() {
       method: 'GET',
       dataResponse: 'json',
     }).then((response) => {
-      setCategories(response.data.trivia_categories);
+      const originalCategories = response.data.trivia_categories;
+      const slicedCategories = originalCategories.slice(1, originalCategories.length);
+      setCategories(slicedCategories);
+      console.log(categories);
+      console.log(slicedCategories);
     });
   }, []);
 

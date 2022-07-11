@@ -25,7 +25,6 @@ const CurrentGame = () => {
         const dbRef = ref(database, `/${gameId}`);
         onValue(dbRef, (response) => {
             const data = response.val();
-            console.log(data);
             
             setResultsData(data);
 
@@ -62,14 +61,12 @@ const CurrentGame = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(resultsData);
 
         if (resultsData.gameData.length - 1 === currentQuestion) {
             return;
         } else {
-             setCurrentQuestion(currentQuestion+1);
+            setCurrentQuestion(currentQuestion+1);
         }
-       
         setChecked0(false);
         setChecked1(false);
         setChecked2(false);
@@ -102,9 +99,29 @@ const CurrentGame = () => {
     }
 
     const handleShowScore = () => {
-        setIsClicked(!isClicked);
+        // setIsClicked(true);
+        // if (userAnswer === currentCorrectAns) {
+        //     setScore(score + 1);
+        // } else {
+        //     console.log('WRONG WRONG SO WRONG');
+        // }
+        if (isClicked === false) {
+            if (userAnswer === currentCorrectAns) {
+                setScore(score + 1);
+            } else {
+                console.log('WRONG WRONG SO WRONG');
+            }
+        }
+        setIsClicked(true);
     }
+
+    /*
+    handleShowScore = function that gets executed by finish button
+
+    we need to find a way to make score only add once after being clicked
+     */
     
+    // 
     if (resultsData.length < 1) {
         return (
             <p>Game is loading</p>
@@ -116,21 +133,21 @@ const CurrentGame = () => {
             <section>
                 <form onSubmit={handleSubmit}>
                 <fieldset>
-                <legend>{resultsData.gameData[currentQuestion].question}</legend>
-                    <label htmlFor='option1'>{allAnswersArray[0]}</label>
-                    <input id='option1' onClick={handleClick} onChange={handleUserInput0} type='radio' name='answer' value={allAnswersArray[0]} checked={checked0}></input>
+                <legend>{resultsData.gameData[currentQuestion].question.replace(/&quot;/g, `"`).replace(/&#039;/g, `'`)}</legend>
+                    <label htmlFor='option1'>{allAnswersArray[0].replace(/&quot;/g, `"`).replace(/&#039;/g, `'`)}</label>
+                    <input id='option1' onClick={handleClick} onChange={handleUserInput0} type='radio' name='answer' value={allAnswersArray[0]} checked={checked0} required></input>
 
-                    <label htmlFor='option2'>{allAnswersArray[1]}</label>
-                    <input id='option2' onClick={handleClick} onChange={handleUserInput1} type='radio' name='answer' value={allAnswersArray[1]} checked={checked1}></input>
+                    <label htmlFor='option2'>{allAnswersArray[1].replace(/&quot;/g, `"`).replace(/&#039;/g, `'`)}</label>
+                    <input id='option2' onClick={handleClick} onChange={handleUserInput1} type='radio' name='answer' value={allAnswersArray[1]} checked={checked1} required></input>
 
-                    <label htmlFor='option3'>{allAnswersArray[2]}</label>
-                    <input id='option3' onClick={handleClick} onChange={handleUserInput2} type='radio' name='answer' value={allAnswersArray[2]} checked={checked2}></input>
+                    <label htmlFor='option3'>{allAnswersArray[2].replace(/&quot;/g, `"`).replace(/&#039;/g, `'`)}</label>
+                    <input id='option3' onClick={handleClick} onChange={handleUserInput2} type='radio' name='answer' value={allAnswersArray[2]} checked={checked2} required></input>
 
-                    <label htmlFor='option4'>{allAnswersArray[3]}</label>
-                    <input id='option4' onClick={handleClick} onChange={handleUserInput3} type='radio' name='answer' value={allAnswersArray[3]} checked={checked3}></input>
+                    <label htmlFor='option4'>{allAnswersArray[3].replace(/&quot;/g, `"`).replace(/&#039;/g, `'`)}</label>
+                    <input id='option4' onClick={handleClick} onChange={handleUserInput3} type='radio' name='answer' value={allAnswersArray[3]} checked={checked3} required></input>
                     
                     {
-                        resultsData.gameData.length - 1 === currentQuestion ? <button onClick={ handleShowScore }>Show my score</button>
+                        resultsData.gameData.length - 1 === currentQuestion ? <button onClick={ handleShowScore }>Finish</button>
                         : <button type='submit' >Next Question</button>
                     }
 

@@ -62,10 +62,11 @@ const NewGameForm = (props) => {
             <form action="" onSubmit={handleSubmit}>
 
                 <label htmlFor="gameName">Name your game!</label>
-                <input type="text" id="gameName" placeholder="Dua Lipa" onChange={handleNameChange}/>
+                <input type="text" id="gameName" placeholder="Dua Lipa" onChange={handleNameChange} required/>
 
                 <label htmlFor="category">Select Category:</label>
                 <select name="category" id="category" onChange={handleCategoryChange}>
+                    <option value disabled selected>Please select a category</option>
                     {
                         categoriesData.map((category) => {
                             return(
