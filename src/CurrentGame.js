@@ -111,38 +111,54 @@ const CurrentGame = () => {
         setIsClicked(true);
     }
 
+    // To help decode the html encoding: https://tertiumnon.medium.com/js-how-to-decode-html-entities-8ea807a140e5
+    function decodeText(text) {
+        const textArea = document.createElement('textarea');
+        textArea.innerHTML = text;
+        return textArea.value;
+    }
+
     if (resultsData.length < 1) {
         return (
             <p>Game is loading</p>
         )
     } else {    
         return (
-            <section>
+            <section className="currentGameContainer wrapper">
                 {
                     isClicked === false ?                 
                     
                     <form onSubmit={handleSubmit}>
                         <fieldset>
-                            <legend>{resultsData.gameData[currentQuestion].question.replace(/&quot;/g, `"`).replace(/&#039;/g, `'`)}</legend>
-                                <label htmlFor='option1'>{allAnswersArray[0].replace(/&quot;/g, `"`).replace(/&#039;/g, `'`)}</label>
-                                <input id='option1' onClick={handleClick} onChange={handleUserInput0} type='radio' name='answer' value={allAnswersArray[0]} checked={checked0} required></input>
+                            <legend>{decodeText(resultsData.gameData[currentQuestion].question)}</legend>
 
-                                <label htmlFor='option2'>{allAnswersArray[1].replace(/&quot;/g, `"`).replace(/&#039;/g, `'`)}</label>
-                                <input id='option2' onClick={handleClick} onChange={handleUserInput1} type='radio' name='answer' value={allAnswersArray[1]} checked={checked1} required></input>
+                                <div className="answer">
+                                    <input id='option1' onClick={handleClick} onChange={handleUserInput0} type='radio' name='answer' value={allAnswersArray[0]} checked={checked0} required></input>
+                                    <label htmlFor='option1'>{decodeText(allAnswersArray[0])}</label>
+                                </div>
 
-                                <label htmlFor='option3'>{allAnswersArray[2].replace(/&quot;/g, `"`).replace(/&#039;/g, `'`)}</label>
-                                <input id='option3' onClick={handleClick} onChange={handleUserInput2} type='radio' name='answer' value={allAnswersArray[2]} checked={checked2} required></input>
+                                <div className="answer">
+                                    <input id='option2' onClick={handleClick} onChange={handleUserInput1} type='radio' name='answer' value={allAnswersArray[1]} checked={checked1} required></input>
+                                    <label htmlFor='option2'>{decodeText(allAnswersArray[1])}</label>
+                                </div>
 
-                                <label htmlFor='option4'>{allAnswersArray[3].replace(/&quot;/g, `"`).replace(/&#039;/g, `'`)}</label>
-                                <input id='option4' onClick={handleClick} onChange={handleUserInput3} type='radio' name='answer' value={allAnswersArray[3]} checked={checked3} required></input>
-                                
+                                <div className="answer">
+                                    <input id='option3' onClick={handleClick} onChange={handleUserInput2} type='radio' name='answer' value={allAnswersArray[2]} checked={checked2} required></input>
+                                    <label htmlFor='option3'>{decodeText(allAnswersArray[2])}</label>
+                                </div>
+
+                                <div className="answer">
+                                    <input id='option4' onClick={handleClick} onChange={handleUserInput3} type='radio' name='answer' value={allAnswersArray[3]} checked={checked3} required></input>
+                                    <label htmlFor='option4'>{decodeText(allAnswersArray[3])}</label>
+                                </div>
+
                                 {
-                                    resultsData.gameData.length - 1 === currentQuestion ? <button onClick={ handleShowScore }>Finish</button>
-                                    : <button type='submit' >Next Question</button>
+                                    resultsData.gameData.length - 1 === currentQuestion ? <button className="currentGameButton" onClick={ handleShowScore }>Finish</button>
+                                    : <button className="currentGameButton" type='submit' >Next Question</button>
                                 }
                         </fieldset>
                     </form>
-                : <EndOfGame score={score} resultsData={resultsData}/>}
+                : <EndOfGame score={score} resultsData={resultsData} decodeText={decodeText}/>}
                 {isModalOn ? <Modal setIsModalOn={setIsModalOn} resultsData={resultsData} currentQuestion={currentQuestion} userAnswer={userAnswer}/> : null}
             </section>
         )

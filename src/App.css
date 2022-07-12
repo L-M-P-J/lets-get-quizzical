@@ -99,6 +99,8 @@ header {
   border: 1px solid #813AAA;
   font-size: 2rem;
   border: 1px solid black;
+  transition: 0.3s;
+  cursor: pointer;
 }
 
 .gameButton:hover,
@@ -147,6 +149,87 @@ header {
 .triangleThree {
   border-bottom: 100px solid #E6C81C;
 }
+
+
+/* Current Game Styles */
+
+.currentGameContainer {
+  margin: 50px auto;
+  padding: 60px 80px;
+  background: #813AAA;
+  min-height: calc(90vh - 100px);
+  border-radius: 15px;
+  box-shadow: 0 3px 10px rgb(76, 74, 78);
+  border: 1px solid black;
+}
+
+
+fieldset {
+  border: 0;
+}
+
+.currentGameContainer legend {
+  font-family: 'Caveat Brush', cursive;
+  font-size: 2.2rem;
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+.currentGameContainer label {
+  font-size: 1.1rem;
+  padding: 15px;
+}
+
+.answer {
+  color: black;
+  padding: 30px 0;
+}
+
+.answer label {
+  background: #07C3C7;
+  border-radius: 15px;
+  transition: 0.3s;
+}
+
+input[type="radio"] {
+    opacity: 0.01;
+}
+
+.answer input:checked + label {
+  background: #E6C81C;
+  border-radius: 15px;
+}
+
+.answer label:hover {
+  background: #E6C81C;
+}
+
+.currentGameButton {
+  font-family: 'Caveat Brush', cursive;
+  color: white;
+  letter-spacing: 2px;
+  background-color: #e986b8;
+  padding: 10px 15px;
+  width: 250px;
+  text-align: center;
+  border-radius: 15px;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  border: 1px solid #813AAA;
+  font-size: 1.4rem;
+  transition: 0.3s;
+  margin-top: 30px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.currentGameButton:hover,
+.currentGameButton:focus {
+  -webkit-text-stroke-color: #813AAA;
+  border: 1px solid #813AAA;
+  background: #E6C81C;
+}
+
 
 /* Footer Styles */
 
