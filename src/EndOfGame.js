@@ -1,15 +1,15 @@
 import { Link } from 'react-router-dom';
-import uuid from 'react-uuid';
+// import uuid from 'react-uuid';
 
 const EndOfGame = (props) => {
-    const { score, resultsData, decodeText} = props;
+    const { score, resultsData } = props;
     console.log(resultsData.gameData);
     return (
         <div>
             <p>Your final score is:</p>
             <p>{score}/{resultsData.gameData.length}</p>
             <Link to="/"><i className="fa-solid fa-arrow-left"></i>Make a new game</Link>
-            {
+            {/* {
                 resultsData.gameData.map( (item) => {
                     console.log(item.question.correct_answer);
                     return  <div key={uuid()}>
@@ -17,7 +17,7 @@ const EndOfGame = (props) => {
                                 <p>Answer: {decodeText(item.correct_answer)}</p>
                             </div>
                 })
-            }
+            } */}
         </div>
     )
 }

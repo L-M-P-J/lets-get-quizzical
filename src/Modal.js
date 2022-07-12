@@ -5,14 +5,23 @@ const Modal = (props) => {
         setIsModalOn(false);
     }
 
-    console.log(resultsData);
-
     return(
         <div className="modal">  
-            <p>Correct Answer: {resultsData.gameData[currentQuestion - 1].correct_answer.replace(/&quot;/g, `"`).replace(/&#039;/g, `'`)}</p>
-            <p>Your Answer: {userAnswer.replace(/&quot;/g, `"`).replace(/&#039;/g, `'`)}</p>
-            <p>Modal</p>
-            <button onClick={handleClick}><i className="fa-solid fa-x" aria-hidden="true"></i><div className="sr-only">Exit Modal</div></button>
+            <div className="modal-container">
+                <div className="container">
+                    <div className="circle-border"></div>
+                    <div className="circle">
+                        <div className="error"></div>
+                    </div>
+                </div>
+                <h3>Nice Try!</h3>
+                <div className="modal-text">
+                    <div><span className="correct-answer">Correct Answer:</span> <p>{resultsData.gameData[currentQuestion - 1].correct_answer.replace(/&quot;/g, `"`).replace(/&#039;/g, `'`)}</p></div>
+                    <div className="your-answer-paragraph"><span className="your-answer">Your Answer:</span><p>{userAnswer.replace(/&quot;/g, `"`).replace(/&#039;/g, `'`)}</p></div>
+                </div>
+                <button onClick={handleClick} className="exit-modal">Continue</button>
+            </div>
+            <div className="modalGray"></div>
         </div>
     )
 }
