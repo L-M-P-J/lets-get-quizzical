@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import uuid from 'react-uuid';
 
 const EndOfGame = (props) => {
-    const { score, resultsData } = props;
+    const { score, resultsData, decodeText} = props;
     console.log(resultsData.gameData);
     return (
         <div>
@@ -13,8 +13,8 @@ const EndOfGame = (props) => {
                 resultsData.gameData.map( (item) => {
                     console.log(item.question.correct_answer);
                     return  <div key={uuid()}>
-                                <p>{item.question.replace(/&quot;/g, `"`).replace(/&#039;/g, `'`)}</p>
-                                <p>Answer: {item.correct_answer.replace(/&quot;/g, `"`).replace(/&#039;/g, `'`)}</p>
+                                <p>{decodeText(item.question)}</p>
+                                <p>Answer: {decodeText(item.correct_answer)}</p>
                             </div>
                 })
             }
