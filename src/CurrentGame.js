@@ -147,13 +147,14 @@ const CurrentGame = () => {
                                         <input className="sr-only" id='option3' onClick={handleClick} onChange={handleUserInput2} type='radio' name='answer' value={allAnswersArray[2]} checked={checked2} required></input>
                                         <label htmlFor='option3'>{decodeText(allAnswersArray[2])}</label>
                                     </div>
+                                    
+                                    <div className="answer">
+                                        <input className="sr-only" id='option4' onClick={handleClick} onChange={handleUserInput3} type='radio' name='answer' value={allAnswersArray[3]} checked={checked3} required></input>
+                                        <label htmlFor='option4'>{decodeText(allAnswersArray[3])}</label>
+                                    </div>
 
                                 </div>
 
-                                <div className="answer">
-                                    <input className="sr-only" id='option4' onClick={handleClick} onChange={handleUserInput3} type='radio' name='answer' value={allAnswersArray[3]} checked={checked3} required></input>
-                                    <label htmlFor='option4'>{decodeText(allAnswersArray[3])}</label>
-                                </div>
 
                                 {
                                     resultsData.gameData.length - 1 === currentQuestion ? <button className="currentGameButton" onClick={ handleShowScore }>Finish</button>

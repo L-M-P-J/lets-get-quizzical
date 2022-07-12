@@ -7,7 +7,7 @@ import { getDatabase, ref, push, onValue} from 'firebase/database';
 const NewGameForm = (props) => {
 
     const { categoriesData, setResults } = props;
-    const [ numberChoice, setNumberChoice ] = useState(1);
+    const [ numberChoice, setNumberChoice ] = useState(5);
     const [ categoryChoice, setCategoryChoice ] = useState('');
     const [ gameId, setGameId ] = useState('');
     const [ gameName, setGameName ] = useState('');
@@ -83,7 +83,7 @@ const NewGameForm = (props) => {
                     name="questionNumber"
                     placeholder=""
                     step="1"
-                    min="1"
+                    min="5"
                     max="30"
                     onChange={ handleNumberChange }
                     value={numberChoice}
