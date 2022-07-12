@@ -153,17 +153,15 @@ const CurrentGame = () => {
                                         <label htmlFor='option4'>{decodeText(allAnswersArray[3])}</label>
                                     </div>
 
-                                </div>
-
-
                                 {
                                     resultsData.gameData.length - 1 === currentQuestion ? <button className="currentGameButton" onClick={ handleShowScore }>Finish</button>
                                     : <button className="currentGameButton" type='submit' >Next Question</button>
                                 }
+                                </div>
                         </fieldset>
                     </form>
                 : <EndOfGame score={score} resultsData={resultsData} decodeText={decodeText}/>}
-                {isModalOn ? <Modal setIsModalOn={setIsModalOn} resultsData={resultsData} currentQuestion={currentQuestion} userAnswer={userAnswer}/> : null}
+                {isModalOn ? <Modal setIsModalOn={setIsModalOn} resultsData={resultsData} currentQuestion={currentQuestion} userAnswer={userAnswer} decodeText={decodeText}/> : null}
             </section>
         )
     }

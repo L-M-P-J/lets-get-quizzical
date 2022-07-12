@@ -1,5 +1,5 @@
 const Modal = (props) => {
-    const {setIsModalOn, resultsData, currentQuestion, userAnswer} = props;
+    const {setIsModalOn, resultsData, currentQuestion, userAnswer, decodeText } = props;
 
     const handleClick = () => {
         setIsModalOn(false);
@@ -16,8 +16,8 @@ const Modal = (props) => {
                 </div>
                 <h3>Nice Try!</h3>
                 <div className="modal-text">
-                    <div><span className="correct-answer">Correct Answer:</span> <p>{resultsData.gameData[currentQuestion - 1].correct_answer.replace(/&quot;/g, `"`).replace(/&#039;/g, `'`)}</p></div>
-                    <div className="your-answer-paragraph"><span className="your-answer">Your Answer:</span><p>{userAnswer.replace(/&quot;/g, `"`).replace(/&#039;/g, `'`)}</p></div>
+                    <div><span className="correct-answer">Correct Answer:</span> <p>{decodeText(resultsData.gameData[currentQuestion - 1].correct_answer)}</p></div>
+                    <div className="your-answer-paragraph"><span className="your-answer">Your Answer:</span><p>{decodeText(userAnswer)}</p></div>
                 </div>
                 <button onClick={handleClick} className="exit-modal">Continue</button>
             </div>

@@ -5,10 +5,19 @@ const EndOfGame = (props) => {
     const { score, resultsData } = props;
     console.log(resultsData.gameData);
     return (
-        <div>
-            <p>Your final score is:</p>
-            <p>{score}/{resultsData.gameData.length}</p>
-            <Link to="/"><i className="fa-solid fa-arrow-left"></i>Make a new game</Link>
+        <div className="endContainer">
+            <p>Quizzical Is Over!</p> 
+
+            <div className="endText">
+                <p>Your final score is:</p>
+                <p>{score} out of {resultsData.gameData.length}</p>
+
+                <p>Thanks for playing!</p>
+                {/* <Link to="/"><i className="fa-solid fa-arrow-left"></i>New game</Link> */}
+
+                <Link to="/"><button className="currentGameButton">New Game</button></Link>
+
+            </div>
             {/* {
                 resultsData.gameData.map( (item) => {
                     console.log(item.question.correct_answer);
