@@ -183,24 +183,29 @@ fieldset {
 .answer {
   color: black;
   padding: 30px 0;
+  width: 50%;
 }
 
 .answer label {
   background: #07C3C7;
   border-radius: 15px;
   transition: 0.3s;
+  width: 100%;
+  display: inline-block;
+
 }
 
 input[type="radio"] {
     opacity: 0.01;
 }
 
-.answer input:checked + label {
+/* .answer input:checked + label {
   background: #E6C81C;
   border-radius: 15px;
-}
+} */
 
-.answer label:hover {
+.answer label:hover{
+/* .answer label:active { */
   background: #E6C81C;
 }
 
