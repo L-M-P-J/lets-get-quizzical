@@ -34,7 +34,7 @@ function App() {
       console.log(categories);
       console.log(slicedCategories);
     });
-  }, [categories]);
+  }, []);
 
   return (
     <div className="App">

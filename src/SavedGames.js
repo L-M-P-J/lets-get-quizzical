@@ -26,23 +26,41 @@ const SavedGames = () => {
 
     return (
        
-        <ul className="savedGamesList">
-            {gameList.map( (game) => {
-                return (
-                    
-                    <li key={game.key}>
-                        <Link to={`/currentGame/${game.key}`}>
-                            <h2>{game.name}</h2>
-                            <p>Category:{game.gameData[0].category}</p>
-                            {/* error handle for general knowledge or REMOVE */}
-                            <p>Number of questions:{game.gameData.length}</p>
+        <section className="wrapper savedGames">
+
+            <Link to="/"><i className="fa-solid fa-arrow-left"></i>Make a new game</Link>
+
+            <h2>Saved Games</h2>
+            <h3>Click on a game to re-play!</h3>
+
+            <ul className="savedGamesList">
+                {gameList.map( (game) => {
+                    return (
                         
-                        </Link>
-                    </li>
-                    
-                )
-            })} 
-        </ul>
+                        <li key={game.key} className="cassette">
+                            <Link to={`/currentGame/${game.key}`} className="cassetteLabel">
+
+                                <h4>Category: {game.gameData[0].category}</h4>
+                                {/* error handle for general knowledge or REMOVE */}
+                                <p>Number of questions: {game.gameData.length}</p>
+                                <p>Made by: {game.name}</p>
+
+                                <div className="cassetteTape">
+                                    <div className="tapeFrame">
+
+                                    </div>
+                                </div>
+
+                            </Link>
+
+{/* TO-DO - hide all cassette tape related divs from screen readers */}
+                            
+                        </li>
+                        
+                    )
+                })} 
+            </ul>
+        </section>
     )
 }
 
