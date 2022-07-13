@@ -4,8 +4,9 @@ import firebase from './firebase';
 import { getDatabase, onValue, ref } from 'firebase/database';
 import EndOfGame from './EndOfGame';
 import Modal from './Modal';
+import claps from '../src/assets/claps_final.mp3';
 
-const CurrentGame = () => {
+const CurrentGame = (props) => {
 
     const {gameId} = useParams();
 
@@ -63,7 +64,8 @@ const CurrentGame = () => {
     }, [currentQuestion, resultsData]);
 
     //clapping sound effect - Audio is a built in object with different properties, one of them play()
-    const clappingSound = new Audio("/assets/claps_final.mp3");
+    // const clappingSound = new Audio(claps);
+    // const clappingSound = null;
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -78,7 +80,7 @@ const CurrentGame = () => {
         setChecked3(false);
         if (userAnswer === currentCorrectAns) {
             setScore(score + 1);
-            clappingSound.play();
+            props.clappingSound.play();
         } else {
             setIsModalOn(true);
         }

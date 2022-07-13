@@ -227,7 +227,6 @@ html {
 /* Overall */
 
 .App {
-  height: 100%;
   display: flex;
   justify-content: center;
   align-content: center;
@@ -246,7 +245,7 @@ body {
   font-family: "Lato", sans-serif;
   color: #ffffff;
   background-image: url("background-image.jpg");
-  animation: background-animation 120s linear infinite;
+  animation: background-animation 100s linear infinite;
   height: 100vh;
 }
 
@@ -302,6 +301,12 @@ h4 {
 h1 {
   font-size: 4rem;
   text-align: center;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 3rem;
+  text-align: center;
 }
 
 h3 {
@@ -323,7 +328,7 @@ p {
 header {
   font-family: "Caveat Brush", cursive;
   text-transform: capitalize;
-  min-height: calc(90vh - 100px);
+  min-height: calc(90vh - 400px);
 }
 
 .gameButton {
@@ -332,13 +337,15 @@ header {
   width: 250px;
   text-align: center;
   border-radius: 15px;
+  box-shadow: 0 3px 10px rgb(76, 74, 78);
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
-  border: 1px solid #813aaa;
+  border: 1px solid #07c3c7;
   font-size: 2rem;
-  border: 1px solid black;
   transition: 0.3s;
   cursor: pointer;
+  animation: glow 1s infinite;
+  transition: 0.5s;
 }
 
 .gameButton:hover,
@@ -348,14 +355,36 @@ header {
 }
 
 .headerContainer {
+  min-height: calc(90vh - 400px);
   background-color: rgb(129, 58, 170);
   padding: 100px;
-  margin-top: 100px;
+  margin-top: 200px;
+  margin-bottom: 200px;
   border-radius: 15px;
   box-shadow: 0 3px 10px rgb(76, 74, 78);
-  border: 1px solid black;
   position: relative;
   z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.fa-volume-high,
+.fa-volume-xmark {
+  font-size: 1.5rem;
+  position: absolute;
+  cursor: pointer;
+}
+
+.fa-volume-xmark {
+  bottom: 20px;
+  right: 20px;
+}
+
+.fa-volume-high {
+  bottom: 20px;
+  right: 17px;
 }
 
 .buttonContainer {
@@ -364,26 +393,19 @@ header {
   margin-top: 25px;
 }
 
-.rectangle {
-  position: absolute;
-  width: 200px;
-  height: 100px;
-  border: 5px solid #2b989c;
-  top: 8px;
-  left: 25%;
-  transform: rotate(150deg);
-}
-
 /* Current Game Styles */
 
 .currentGameContainer {
   padding: 60px 80px;
   background: #813aaa;
-  min-height: calc(90vh - 100px);
+  min-height: calc(90vh - 125px);
   border-radius: 15px;
   box-shadow: 0 3px 10px rgb(76, 74, 78);
-  border: 1px solid black;
   margin-bottom: 75px;
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 fieldset {
@@ -451,7 +473,6 @@ input[type="radio"] {
   border-radius: 15px;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
-  border: 1px solid #813aaa;
   font-size: 1.4rem;
   transition: 0.3s;
   margin-top: 50px;
@@ -527,7 +548,7 @@ input[type="radio"] {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.8);
   z-index: 20;
 }
 
@@ -629,12 +650,15 @@ input[type="radio"] {
 .formSection {
   position: relative;
   background: #813aaa;
-  /* border: 1px solid #000; */
   border-radius: 15px;
   box-shadow: 0 3px 10px #4c4a4e;
   margin: 50px auto;
   min-height: calc(90vh - 100px);
   padding: 60px 80px;
+}
+
+.formSection h2 {
+  margin-bottom: 50px;
 }
 
 .wrapper {
@@ -665,13 +689,29 @@ input[type="radio"] {
   transition: 0.3s;
   width: 75%;
   font-family: Lato, sans-serif;
-  font-weight: 900;
   border: none;
   margin-left: 10px;
   margin-top: 30px;
-  padding: 15px;
-  box-shadow: 5px 5px 20px rgb(81, 224, 210), -5px -5px 20px rgb(81, 224, 210);
+  padding: 25px;
 }
+
+.selectCategory {
+  width: 100%;
+  -webkit-appearance: none;
+}
+
+.arrowContainer {
+  position: relative;
+  width: 75%;
+}
+
+.fa-caret-down {
+  font-size: 1.7rem;
+  position: absolute;
+  right: 5px;
+  top: 50%;
+}
+
 .inputForm:focus,
 .numOfQuestions:focus {
   outline: none;
@@ -680,7 +720,8 @@ input[type="radio"] {
 .selectNumber {
   text-align: center;
   margin-top: 30px;
-  font-size: 1.3rem;
+  margin-right: 15px;
+  font-size: 1.1rem;
 }
 
 .numOfQuestions {
@@ -689,23 +730,20 @@ input[type="radio"] {
   text-align: center;
   margin: 0 auto;
   margin-top: 30px;
-  padding: 10px 15px;
+  padding: 15px 15px;
   border-radius: 15px;
   border: none;
-  box-shadow: 5px 5px 20px rgb(81, 224, 210), -5px -5px 20px rgb(81, 224, 210);
 }
 
 .submitGame {
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: #000;
   background-color: #e986b8;
-  /* border: 1px solid #813aaa; */
   border: none;
   border-radius: 50%;
   color: #fff;
   cursor: pointer;
   font-family: Caveat Brush, cursive;
-  /* font-size: 2rem; */
   letter-spacing: 2px;
   margin-top: 30px;
   padding: 10px 15px;
@@ -714,7 +752,7 @@ input[type="radio"] {
   width: 150px;
   height: 150px;
   margin: 30px auto;
-  /* shadow animation bellow */
+  /* shadow animation below */
   animation: glow 1s infinite;
   transition: 0.5s;
 }
@@ -739,7 +777,7 @@ input[type="radio"] {
   border-radius: 15px;
 }
 
-span {
+.submitGame span {
   display: block;
   width: 100%;
   height: 100%;
@@ -749,9 +787,9 @@ span {
   margin-right: 0px;
   font-size: 2rem;
   transition: 0.3s;
-  opacity: 0.2;
 }
-span:hover {
+
+.submitGame span:hover {
   transition: 0.3s;
   opacity: 1;
   font-weight: 700;
@@ -767,6 +805,8 @@ footer {
   text-align: center;
   box-shadow: 0 3px 10px rgb(76, 74, 78);
   border: 1px solid black;
+  display: flex;
+  align-items: center;
 }
 
 footer p {
@@ -808,17 +848,18 @@ footer a {
     background-position: 0 0;
   }
   100% {
-    background-position: -125% 75%;
+    background-position: -100% 150%;
   }
 }
 /* Saved Games Styles */
 
+.savedGamesContainer {
+  background-color: #e986b8;
+  border-radius: 15px;
+}
+
 .savedGames {
   text-align: center;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
 }
 
 .savedGames h2,
@@ -830,11 +871,12 @@ footer a {
 .savedGames h2 {
   font-size: 4rem;
   margin-top: 40px;
+  padding-top: 20px;
 }
 
 .savedGames h3 {
   font-size: 2.5rem;
-  margin-bottom: 40px;
+  padding-bottom: 40px;
 }
 
 .savedGamesList {
@@ -842,7 +884,6 @@ footer a {
   flex-direction: column-reverse;
   justify-content: center;
   align-items: center;
-  background-color: #e986b8;
   margin-bottom:30px;
 }
 
@@ -919,6 +960,7 @@ p.madeBy {
 }
 
 /* SAVED GAMES MEDIA QUERIES */
+
 @media (max-width: 768px) {
   
   .tightWrapper {

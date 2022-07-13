@@ -8,6 +8,7 @@ import SavedGames from './SavedGames';
 import NewGameForm from './NewGameForm';
 import Footer from './Footer';
 import CurrentGame from './CurrentGame';
+import claps from '../src/assets/claps_final.mp3';
 
 // NEXT STEPS:
 
@@ -21,6 +22,9 @@ function App() {
 
   const [ categories, setCategories ] = useState([]);
   const [results, setResults] = useState([]);
+
+  //clapping sound effect - Audio is a built in object with different properties, one of them play()
+  const clappingSound = new Audio(claps);
 
   useEffect( () => {
     axios({
@@ -43,7 +47,7 @@ function App() {
         <Route path="/" element={<Header />}/>
         <Route path="/newgame" element={<NewGameForm categoriesData={categories} setResults={setResults} results={results}/>}/>
         <Route path="/savedgames" element={ <SavedGames />}/>
-        <Route path="/currentGame/:gameId" element={<CurrentGame />}/>
+        <Route path="/currentGame/:gameId" element={<CurrentGame clappingSound={clappingSound}/>}/>
       </Routes>
       <Footer/>
 

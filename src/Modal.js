@@ -19,7 +19,7 @@ const Modal = (props) => {
                     <div><span className="correct-answer">Correct Answer:</span> <p>{decodeText(resultsData.gameData[currentQuestion - 1].correct_answer)}</p></div>
                     <div className="your-answer-paragraph"><span className="your-answer">Your Answer:</span><p>{decodeText(userAnswer)}</p></div>
                 </div>
-                <button onClick={handleClick} className="exit-modal">Continue</button>
+                <button onClick={handleClick} className="exit-modal currentGameButton">Continue</button>
             </div>
             <div className="modalGray"></div>
         </div>

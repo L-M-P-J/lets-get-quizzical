@@ -54,19 +54,23 @@ const NewGameForm = (props) => {
     }
 
     console.log(gameId);
-    console.clear();
+    // console.clear();
 
     return (
         <section className="formSection wrapper">
+
+            <h2>Are you Ready To Get Quizzical?!</h2>
             
             <form className="gameForm" action="" onSubmit={handleSubmit}>
 
                 <label className="sr-only" htmlFor="gameName">Name your game!</label>
                 <input className="inputForm" type="text" id="gameName" placeholder="Name your game!" onChange={handleNameChange} required/>
 
-                <label className="sr-only" htmlFor="category">Select Category:</label>
+                <div className='arrowContainer'>
+                <i className="fa-solid fa-caret-down"></i>
+                <label className="sr-only" htmlFor="category">Select Category: </label>
                 <select className="selectCategory" name="category" id="category" onChange={handleCategoryChange}>
-                    <option value disabled selected>Please select a category</option>
+                    <option value disabled selected>Select a category</option>
                     {
                         categoriesData.map((category) => {
                             return(
@@ -75,20 +79,23 @@ const NewGameForm = (props) => {
                         })
                     }
                 </select>
+                </div>
                 
-                <label className="selectNumber" htmlFor="questionNumber">Select number of questions:</label>
-                <input
-                className="numOfQuestions"
-                    type="number"
-                    id="questionNumber"
-                    name="questionNumber"
-                    placeholder=""
-                    step="1"
-                    min="5"
-                    max="30"
-                    onChange={ handleNumberChange }
-                    value={numberChoice}
-                />
+                <div>
+                    <label className="selectNumber" htmlFor="questionNumber">Select number of questions:</label>
+                    <input
+                    className="numOfQuestions"
+                        type="number"
+                        id="questionNumber"
+                        name="questionNumber"
+                        placeholder=""
+                        step="1"
+                        min="5"
+                        max="30"
+                        onChange={ handleNumberChange }
+                        value={numberChoice}
+                    />
+                </div>
                 
                 <button className="submitGame" type="submit"><span>Let's Play!</span></button>
             </form>

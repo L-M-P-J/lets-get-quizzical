@@ -23,39 +23,42 @@ const SavedGames = () => {
     }, [])
 
     return (
-       
+
         <section className="tightWrapper savedGames">
 
             <Link to="/" className="currentGameButton savedGamesButton">Make a new game</Link>
 
-            <h2>Saved Games</h2>
-            <h3>Click on a game to re-play!</h3>
+            <div className="savedGamesContainer">
+                <h2>Saved Games</h2>
+                <h3>Click on a game to re-play!</h3>
 
-            <ul className="savedGamesList">
-                {gameList.map( (game) => {
-                    return (
+                <ul className="savedGamesList">
+                    {gameList.map( (game) => {
+                        return (
 
-                        <li key={game.key} className="cassette">
-                            <div className="cassetteDiv">
-                                {/* cassette visual */}
-                                <p className="madeBy">{game.name}</p>
-                            </div>
-                            <div className='linkToGame'>
-                            <Link to={`/currentGame/${game.key}`}>
+                            <li key={game.key} className="cassette">
+                                <div className="cassetteDiv">
+                                    {/* cassette visual */}
+                                    <p className="madeBy">{game.name}</p>
+                                </div>
+                                <div className='linkToGame'>
+                                <Link to={`/currentGame/${game.key}`}>
 
-                            <div className="cassetteText">
-                                <h4>{game.gameData[0].category}</h4>
-                                <p>No. of questions: {game.gameData.length}</p>
-                            </div>
+                                <div className="cassetteText">
+                                    <h4>{game.gameData[0].category}</h4>
+                                    <p>No. of questions: {game.gameData.length}</p>
+                                </div>
 
-                            </Link>
-                            </div>
-                        </li>
- 
-                    )
-                })} 
-            </ul>
+                                </Link>
+                                </div>
+                            </li>
+    
+                        )
+                    })} 
+                </ul>
+            </div>
         </section>
+
     )
 }
 
