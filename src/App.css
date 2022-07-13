@@ -19,7 +19,8 @@ html {
 body {
   font-family: 'Lato', sans-serif;
   color: #FFFFFF;
-  background-color: #07C3C7;
+  background-image: url('background-image.jpg');
+  animation: background-animation 120s linear infinite;
 }
 
 img {
@@ -130,28 +131,14 @@ header {
   margin-top: 25px;
 }
 
-.triangleUp {
-  width: 0;
-  height: 0;
-  border-left: 50px solid transparent;
-  border-right: 50px solid transparent;
-  border-bottom: 100px solid red;
+.rectangle {
   position: absolute;
-}
-
-.triangleOne {
-  border-bottom: 100px solid #E6C81C;
+  width: 200px;
+  height: 100px;
+  border: 5px solid #2B989C;
   top: 8px;
-  rotate: 395deg;
-}
-
-.triangleTwo {
-  border-bottom: 100px solid #F02E91;
-  top: 8px;
-}
-
-.triangleThree {
-  border-bottom: 100px solid #E6C81C;
+  left: 25%;
+  transform: rotate(150deg);
 }
 
 
@@ -369,6 +356,42 @@ input[type="radio"] {
   transform: rotateZ(-50deg);
 }
 
+.modal button {
+  background-color: #813AAA;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: white;
+  font-family: 'Lato', sans-serif;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  width: 30%;
+}
+
+
+/* Footer Styles */
+
+footer {
+  background-color: #813AAA;
+  font-family: 'Caveat Brush', cursive;
+  text-transform: capitalize;
+  min-height: 10vh;
+  text-align: center;
+  box-shadow: 0 3px 10px rgb(76, 74, 78);
+  border: 1px solid black;
+}
+
+footer p {
+  padding-top: 25px;
+}
+
+footer a {
+  display: inline;
+}
+
+/* Animations */
+
 @keyframes success-animation {
   0% {
     transform: scale(0);
@@ -393,36 +416,11 @@ input[type="radio"] {
   }
 }
 
-.modal button {
-  background-color: #813AAA;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  color: white;
-  font-family: 'Lato', sans-serif;
-  display: flex;
-  justify-content: center;
-  margin: 0 auto;
-  width: 30%;
-}
-
-
-/* Footer Styles */
-
-footer {
-  background-color: #813AAA;
-  font-family: 'Caveat Brush', cursive;
-  text-transform: capitalize;
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: black;
-  min-height: 10vh;
-  text-align: center;
-}
-
-footer p {
-  padding-top: 25px;
-}
-
-footer a {
-  display: inline;
+@keyframes background-animation {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -125% 75%;
+  }
 }
