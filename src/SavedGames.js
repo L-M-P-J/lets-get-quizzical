@@ -38,7 +38,7 @@ const SavedGames = () => {
                         <li key={game.key} className="cassette">
                             <div className="cassetteDiv">
                                 {/* cassette visual */}
-                                <p className="madeBy">Made by: {game.name}</p>
+                                <p className="madeBy">{game.name}</p>
                             </div>
                             <div className='linkToGame'>
                             <Link to={`/currentGame/${game.key}`}>

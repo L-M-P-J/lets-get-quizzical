@@ -202,6 +202,7 @@ footer a {
   justify-content: center;
   align-items: center;
   background-color: #e986b8;
+  margin-bottom:30px;
 }
 
 .cassette {
@@ -276,6 +277,39 @@ p.madeBy {
   letter-spacing: 3px;
 }
 
+/* SAVED GAMES MEDIA QUERIES */
+@media (max-width: 768px) {
+  
+  .tightWrapper {
+    width: 90%;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .cassetteDiv {
+    min-height: 200px;
+  }
+  
+  .linkToGame a {
+    min-height: 120px;
+  }
+
+  .madeBy {
+    bottom: 50px;
+  }
+
+  p.madeBy {
+    font-size: 0.8rem;
+  }
+
+  .cassetteText h4,
+  .cassetteText p {
+    font-size: 0.8rem;
+  }
+
+}
 
 
 
