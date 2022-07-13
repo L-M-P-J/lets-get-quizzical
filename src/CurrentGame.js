@@ -62,6 +62,9 @@ const CurrentGame = () => {
         }
     }, [currentQuestion, resultsData]);
 
+    //clapping sound effect - Audio is a built in object with different properties, one of them play()
+    const clappingSound = new Audio("/assets/claps_final.mp3");
+
     const handleSubmit = (event) => {
         event.preventDefault();
         if (resultsData.gameData.length - 1 === currentQuestion) {
@@ -75,6 +78,7 @@ const CurrentGame = () => {
         setChecked3(false);
         if (userAnswer === currentCorrectAns) {
             setScore(score + 1);
+            clappingSound.play();
         } else {
             setIsModalOn(true);
         }

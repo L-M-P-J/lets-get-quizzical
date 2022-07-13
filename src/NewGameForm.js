@@ -57,15 +57,15 @@ const NewGameForm = (props) => {
     console.clear();
 
     return (
-        <section>
+        <section className="formSection wrapper">
             
-            <form action="" onSubmit={handleSubmit}>
+            <form className="gameForm" action="" onSubmit={handleSubmit}>
 
-                <label htmlFor="gameName">Name your game!</label>
-                <input type="text" id="gameName" placeholder="Dua Lipa" onChange={handleNameChange} required/>
+                <label className="sr-only" htmlFor="gameName">Name your game!</label>
+                <input className="inputForm" type="text" id="gameName" placeholder="Name your game!" onChange={handleNameChange} required/>
 
-                <label htmlFor="category">Select Category:</label>
-                <select name="category" id="category" onChange={handleCategoryChange}>
+                <label className="sr-only" htmlFor="category">Select Category:</label>
+                <select className="selectCategory" name="category" id="category" onChange={handleCategoryChange}>
                     <option value disabled selected>Please select a category</option>
                     {
                         categoriesData.map((category) => {
@@ -76,8 +76,9 @@ const NewGameForm = (props) => {
                     }
                 </select>
                 
-                <label htmlFor="questionNumber">Select number of questions:</label>
+                <label className="selectNumber" htmlFor="questionNumber">Select number of questions:</label>
                 <input
+                className="numOfQuestions"
                     type="number"
                     id="questionNumber"
                     name="questionNumber"
@@ -88,9 +89,10 @@ const NewGameForm = (props) => {
                     onChange={ handleNumberChange }
                     value={numberChoice}
                 />
-                <Link to="/"><i className="fa-solid fa-arrow-left"></i></Link>
-                <button type="submit">Submit</button>
+                
+                <button className="submitGame" type="submit"><span>Let's Play!</span></button>
             </form>
+            <Link to="/"><i className="fa-solid fa-arrow-left"></i></Link>
 
         </section>
     )
