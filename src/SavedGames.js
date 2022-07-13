@@ -19,16 +19,14 @@ const SavedGames = () => {
             }
             setGameList(newArray);
             console.log(newArray);
-            
-      
         })
     }, [])
 
     return (
        
-        <section className="wrapper savedGames">
+        <section className="tightWrapper savedGames">
 
-            <Link to="/"><i className="fa-solid fa-arrow-left"></i>Make a new game</Link>
+            <Link to="/" className="currentGameButton savedGamesButton">Make a new game</Link>
 
             <h2>Saved Games</h2>
             <h3>Click on a game to re-play!</h3>
@@ -36,27 +34,24 @@ const SavedGames = () => {
             <ul className="savedGamesList">
                 {gameList.map( (game) => {
                     return (
-                        
+
                         <li key={game.key} className="cassette">
-                            <Link to={`/currentGame/${game.key}`} className="cassetteLabel">
+                            <div className="cassetteDiv">
+                                {/* cassette visual */}
+                                <p className="madeBy">Made by: {game.name}</p>
+                            </div>
+                            <div className='linkToGame'>
+                            <Link to={`/currentGame/${game.key}`}>
 
-                                <h4>Category: {game.gameData[0].category}</h4>
-                                {/* error handle for general knowledge or REMOVE */}
-                                <p>Number of questions: {game.gameData.length}</p>
-                                <p>Made by: {game.name}</p>
-
-                                <div className="cassetteTape">
-                                    <div className="tapeFrame">
-
-                                    </div>
-                                </div>
+                            <div className="cassetteText">
+                                <h4>{game.gameData[0].category}</h4>
+                                <p>No. of questions: {game.gameData.length}</p>
+                            </div>
 
                             </Link>
-
-{/* TO-DO - hide all cassette tape related divs from screen readers */}
-                            
+                            </div>
                         </li>
-                        
+ 
                     )
                 })} 
             </ul>
@@ -65,8 +60,3 @@ const SavedGames = () => {
 }
 
 export default SavedGames;
-
-//make a firebase call onvalue to display user game, categories nd number of questions:
-    //for loop to then push it into an array and 
-    //map over the array of games to display them on the page
-    //make each game a link so they can go to currentGame/key
