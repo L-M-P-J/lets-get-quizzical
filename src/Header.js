@@ -4,9 +4,6 @@ const Header = () => {
     return (
         <header>
             <div className="wrapper">
-                <div className="triangleUp triangleOne"></div>
-                <div className="triangleUp triangleTwo"></div>
-                <div className="triangleUp triangleThree"></div>
                 <div className="headerContainer">
                     <h1>lets get quizzical</h1>
                     <div className="buttonContainer">
