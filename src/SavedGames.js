@@ -19,36 +19,44 @@ const SavedGames = () => {
             }
             setGameList(newArray);
             console.log(newArray);
-            
-      
         })
     }, [])
 
     return (
        
-        <ul className="savedGamesList">
-            {gameList.map( (game) => {
-                return (
-                    
-                    <li key={game.key}>
-                        <Link to={`/currentGame/${game.key}`}>
-                            <h2>{game.name}</h2>
-                            <p>Category:{game.gameData[0].category}</p>
-                            {/* error handle for general knowledge or REMOVE */}
-                            <p>Number of questions:{game.gameData.length}</p>
-                        
-                        </Link>
-                    </li>
-                    
-                )
-            })} 
-        </ul>
+        <section className="tightWrapper savedGames">
+
+            <Link to="/" className="currentGameButton savedGamesButton">Make a new game</Link>
+
+            <h2>Saved Games</h2>
+            <h3>Click on a game to re-play!</h3>
+
+            <ul className="savedGamesList">
+                {gameList.map( (game) => {
+                    return (
+
+                        <li key={game.key} className="cassette">
+                            <div className="cassetteDiv">
+                                {/* cassette visual */}
+                                <p className="madeBy">{game.name}</p>
+                            </div>
+                            <div className='linkToGame'>
+                            <Link to={`/currentGame/${game.key}`}>
+
+                            <div className="cassetteText">
+                                <h4>{game.gameData[0].category}</h4>
+                                <p>No. of questions: {game.gameData.length}</p>
+                            </div>
+
+                            </Link>
+                            </div>
+                        </li>
+ 
+                    )
+                })} 
+            </ul>
+        </section>
     )
 }
 
 export default SavedGames;
-
-//make a firebase call onvalue to display user game, categories nd number of questions:
-    //for loop to then push it into an array and 
-    //map over the array of games to display them on the page
-    //make each game a link so they can go to currentGame/key

@@ -249,6 +249,12 @@ img {
   margin: 0 auto;
 }
 
+.tightWrapper {
+  max-width: 900px;
+  width: 75%;
+  margin: 0 auto;
+}
+
 h1,
 h2,
 h3,
@@ -329,7 +335,7 @@ header {
 }
 
 .headerContainer {
-  background-color: rgba(129, 58, 170, 1);
+  background-color: rgb(129, 58, 170);
   padding: 100px;
   margin-top: 100px;
   border-radius: 15px;
@@ -766,3 +772,142 @@ footer a {
     background-position: -125% 75%;
   }
 }
+/* Saved Games Styles */
+
+.savedGames {
+  text-align: center;
+}
+
+.savedGames h2,
+.savedGames h3 {
+  color: black;
+  font-weight: lighter;
+}
+
+.savedGames h2 {
+  font-size: 4rem;
+  margin-top: 40px;
+}
+
+.savedGames h3 {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+}
+
+.savedGamesList {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
+  background-color: #e986b8;
+  margin-bottom:30px;
+}
+
+.cassette {
+  margin: 30px;
+  min-width: 1000px;
+  position: relative;
+}
+
+.cassetteDiv {
+  min-height: 250px;
+  background-image: url(./assets/rsz_casette.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.madeBy {
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: 65px;
+  z-index: 20;
+}
+
+p.madeBy {
+  font-size: 1rem;
+  color: black;
+  text-decoration: underline;
+  font-family: 'Caveat Brush', cursive;
+  text-transform: capitalize;
+  letter-spacing: 3px;
+}
+
+.linkToGame {
+  position: absolute;
+  max-height: 100%;
+  min-height: 200px;
+  right: 0;
+  left: 0;
+  top: 20px;
+  z-index: 10;
+}
+
+.linkToGame a {
+  min-height: 200px;
+}
+
+.cassetteText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cassetteText h4,
+.cassetteText p {
+  color: black;
+  font-size: 1rem;
+  text-decoration: underline;
+}
+
+.cassetteText h4 {
+  text-align: center;
+  font-weight: lighter;
+  display: block;
+  max-width: 30%;
+}
+
+.cassetteText p {
+  font-family: 'Caveat Brush', cursive;
+  text-transform: capitalize;
+  letter-spacing: 3px;
+}
+
+/* SAVED GAMES MEDIA QUERIES */
+@media (max-width: 768px) {
+  
+  .tightWrapper {
+    width: 90%;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .cassetteDiv {
+    min-height: 200px;
+  }
+  
+  .linkToGame a {
+    min-height: 120px;
+  }
+
+  .madeBy {
+    bottom: 50px;
+  }
+
+  p.madeBy {
+    font-size: 0.8rem;
+  }
+
+  .cassetteText h4,
+  .cassetteText p {
+    font-size: 0.8rem;
+  }
+
+}
+
+
+
