@@ -49,10 +49,10 @@ function App() {
     <div className="App">
   
       <Routes>
-        <Route path="/" element={<Header updateVolume={updateVolume}/>}/>
-        <Route path="/newgame" element={<NewGameForm categoriesData={categories} setResults={setResults} results={results}/>}/>
-        <Route path="/savedgames" element={ <SavedGames />}/>
-        <Route path="/currentGame/:gameId" element={<CurrentGame clappingSound={clappingSound} isMuted={isMuted}/>}/>
+        <Route path='/' element={<Header updateVolume={updateVolume}/>}/>
+        <Route path='/newgame' element={<NewGameForm categoriesData={categories} setResults={setResults} results={results}/>}/>
+        <Route path='/savedgames' element={ <SavedGames />}/>
+        <Route path='/currentGame/:gameId' element={<CurrentGame clappingSound={clappingSound} isMuted={isMuted}/>}/>
       </Routes>
       <Footer/>
 
@@ -61,15 +61,3 @@ function App() {
 }
 
 export default App;
-
-/*
-
-  TO-DO FOR TONIGHT
-
-    1. Modal & Google Chrome Issue - Lester
-    2. Research for replacing regex, audio - Pau
-    3. Current Games - Joey
-    4. Saved Games - Mel
-
-
-*/

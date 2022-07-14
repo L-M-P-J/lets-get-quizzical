@@ -133,7 +133,7 @@ const CurrentGame = (props) => {
         )
     } else {    
         return (
-            <section className="currentGameContainer wrapper">
+            <section className='currentGameContainer wrapper'>
                 {
                     isClicked === false ?                 
                     
@@ -141,30 +141,30 @@ const CurrentGame = (props) => {
                         <fieldset>
                             <legend>{decodeText(resultsData.gameData[currentQuestion].question)}</legend>
 
-                                <div className="answerContainer">
-                                    <div className="answer">
+                                <div className='answerContainer'>
+                                    <div className='answer'>
                                         <input className="sr-only" id='option1' onClick={handleClick} onChange={handleUserInput0} type='radio' name='answer' value={allAnswersArray[0]} checked={checked0} required></input>
                                         <label htmlFor='option1'>{decodeText(allAnswersArray[0])}</label>
                                     </div>
 
-                                    <div className="answer">
-                                        <input className="sr-only" id='option2' onClick={handleClick} onChange={handleUserInput1} type='radio' name='answer' value={allAnswersArray[1]} checked={checked1} required></input>
+                                    <div className='answer'>
+                                        <input className='sr-only' id='option2' onClick={handleClick} onChange={handleUserInput1} type='radio' name='answer' value={allAnswersArray[1]} checked={checked1} required></input>
                                         <label htmlFor='option2'>{decodeText(allAnswersArray[1])}</label>
                                     </div>
 
-                                    <div className="answer">
-                                        <input className="sr-only" id='option3' onClick={handleClick} onChange={handleUserInput2} type='radio' name='answer' value={allAnswersArray[2]} checked={checked2} required></input>
+                                    <div className='answer'>
+                                        <input className='sr-only' id='option3' onClick={handleClick} onChange={handleUserInput2} type='radio' name='answer' value={allAnswersArray[2]} checked={checked2} required></input>
                                         <label htmlFor='option3'>{decodeText(allAnswersArray[2])}</label>
                                     </div>
                                     
-                                    <div className="answer">
-                                        <input className="sr-only" id='option4' onClick={handleClick} onChange={handleUserInput3} type='radio' name='answer' value={allAnswersArray[3]} checked={checked3} required></input>
+                                    <div className='answer'>
+                                        <input className='sr-only' id='option4' onClick={handleClick} onChange={handleUserInput3} type='radio' name='answer' value={allAnswersArray[3]} checked={checked3} required></input>
                                         <label htmlFor='option4'>{decodeText(allAnswersArray[3])}</label>
                                     </div>
 
                                 {
-                                    resultsData.gameData.length - 1 === currentQuestion ? <button className="currentGameButton" onClick={ handleShowScore }>Finish</button>
-                                    : <button className="currentGameButton" type='submit' >Next Question</button>
+                                    resultsData.gameData.length - 1 === currentQuestion ? <button className='currentGameButton' onClick={ handleShowScore }>Finish</button>
+                                    : <button className='currentGameButton' type='submit' >Next Question</button>
                                 }
                                 </div>
                         </fieldset>
