@@ -67,7 +67,7 @@ const NewGameForm = (props) => {
                 <i className="fa-solid fa-caret-down"></i>
                 <label className="sr-only" htmlFor="category">Select Category: </label>
                 <select className="selectCategory" name="category" id="category" onChange={handleCategoryChange}>
-                    <option value disabled defaultValue>Select a category</option>
+                    <option value disabled selected>Select a category</option>
                     {
                         categoriesData.map((category) => {
                             return(
@@ -78,7 +78,7 @@ const NewGameForm = (props) => {
                 </select>
                 </div>
                 
-                <div>
+                <div className="numberOfQuestionContainer">
                     <label className="selectNumber" htmlFor="questionNumber">Select number of questions:</label>
                     <input
                     className="numOfQuestions"

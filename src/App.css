@@ -443,7 +443,10 @@ fieldset {
   border-radius: 15px;
   transition: 0.3s;
   width: 100%;
-  display: inline-block;
+  min-height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 input[type="radio"] {
@@ -466,6 +469,7 @@ input[type="radio"] {
   color: white;
   letter-spacing: 2px;
   background-color: #e986b8;
+  border: 1px solid transparent;
   box-shadow: 0 3px 10px rgb(76, 74, 78);
   padding: 10px 15px;
   width: 250px;
@@ -479,6 +483,10 @@ input[type="radio"] {
   cursor: pointer;
   margin: 0 auto;
   margin-top: 30px;
+}
+
+.exitModal.currentGameButton {
+  border: 1px solid transparent;
 }
 
 .currentGameButton:hover,
@@ -527,7 +535,7 @@ input[type="radio"] {
   justify-content: center;
 }
 
-.modal-container {
+.modalContainer {
   min-width: 50vw;
   max-width: 90vw;
   min-height: 50vh;
@@ -558,7 +566,7 @@ input[type="radio"] {
   text-align: center;
 }
 
-.modal-text {
+.modalText {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -568,11 +576,11 @@ input[type="radio"] {
   text-align: center;
 }
 
-.your-answer-paragraph {
+.yourAnswerParagraph {
   margin: 20px 0;
 }
 
-.your-answer {
+.yourAnswer {
   color: rgb(84, 81, 81);
 }
 
@@ -587,7 +595,7 @@ input[type="radio"] {
 }
 
 .circle,
-.circle-border {
+.circleBorder {
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -598,14 +606,14 @@ input[type="radio"] {
   position: relative;
   background: #ebd8f7;
   transform: scale(1);
-  animation: success-animation 700ms ease;
+  animation: successAnimation 700ms ease;
 }
 
-.circle-border {
+.circleBorder {
   z-index: 0;
   position: absolute;
   transform: scale(1.1);
-  animation: circle-animation 400ms ease;
+  animation: circleAnimation 400ms ease;
   background: red;
 }
 
@@ -690,7 +698,6 @@ input[type="radio"] {
   width: 75%;
   font-family: Lato, sans-serif;
   border: none;
-  margin-left: 10px;
   margin-top: 30px;
   padding: 25px;
 }
@@ -708,7 +715,7 @@ input[type="radio"] {
 .fa-caret-down {
   font-size: 1.7rem;
   position: absolute;
-  right: 5px;
+  right: 15px;
   top: 50%;
 }
 
@@ -719,9 +726,12 @@ input[type="radio"] {
 
 .selectNumber {
   text-align: center;
-  margin-top: 30px;
   margin-right: 15px;
   font-size: 1.1rem;
+}
+
+.numberOfQuestionContainer {
+  margin-top: 30px;
 }
 
 .numOfQuestions {
@@ -729,7 +739,6 @@ input[type="radio"] {
   width: 100px;
   text-align: center;
   margin: 0 auto;
-  margin-top: 30px;
   padding: 15px 15px;
   border-radius: 15px;
   border: none;
@@ -755,19 +764,6 @@ input[type="radio"] {
   /* shadow animation below */
   animation: glow 1s infinite;
   transition: 0.5s;
-}
-
-@keyframes glow {
-  0% {
-    box-shadow: 5px 5px 20px rgb(93, 52, 168), -5px -5px 20px rgb(93, 52, 168);
-  }
-
-  50% {
-    box-shadow: 5px 5px 20px rgb(81, 224, 210), -5px -5px 20px rgb(81, 224, 210);
-  }
-  100% {
-    box-shadow: 5px 5px 20px rgb(93, 52, 168), -5px -5px 20px rgb(93, 52, 168);
-  }
 }
 
 .submitGame:hover {
@@ -819,7 +815,7 @@ footer a {
 
 /* Animations */
 
-@keyframes success-animation {
+@keyframes successAnimation {
   0% {
     transform: scale(0);
   }
@@ -833,7 +829,7 @@ footer a {
   }
 }
 
-@keyframes circle-animation {
+@keyframes circleAnimation {
   from {
     transform: scale(0);
   }
@@ -851,6 +847,21 @@ footer a {
     background-position: -100% 150%;
   }
 }
+
+@keyframes glow {
+  0% {
+    box-shadow: 5px 5px 20px rgb(93, 52, 168), -5px -5px 20px rgb(93, 52, 168);
+  }
+
+  50% {
+    box-shadow: 5px 5px 20px rgb(81, 224, 210), -5px -5px 20px rgb(81, 224, 210);
+  }
+
+  100% {
+    box-shadow: 5px 5px 20px rgb(93, 52, 168), -5px -5px 20px rgb(93, 52, 168);
+  }
+}
+
 /* Saved Games Styles */
 
 .savedGamesContainer {
@@ -959,40 +970,116 @@ p.madeBy {
   letter-spacing: 3px;
 }
 
-/* SAVED GAMES MEDIA QUERIES */
+  @media (max-width: 940px) {
 
-@media (max-width: 768px) {
-  
-  .tightWrapper {
-    width: 90%;
+    /* Header */
+
+    .buttonContainer {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .gameButton {
+      margin-bottom: 25px;
+    }
+
+    /* New Game */
+
+    .gameForm {
+      width: 100%;
+    }
   }
 
-}
+/* Media Queries */
+  @media (max-width: 768px) {
+    
+  /* Overall */
 
-@media (max-width: 480px) {
+    .wrapper {
+      width: 90%;
+    }
 
-  .cassetteDiv {
-    min-height: 200px;
+  /* Header */
+    .headerContainer {
+      padding: 100px 50px;
+    }
+
+  /* New Game */
+
+    .formSection {
+      padding: 60px 30px;
+    }
+
+    .selectNumber {
+      margin-bottom: 15px;
+    }
+
+  /* Saved Games */
+    .tightWrapper {
+      width: 90%;
+    }
+
+    .numberOfQuestionContainer {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .selectNumber {
+      margin-right: 0px;
+    }
+
   }
-  
-  .linkToGame a {
-    min-height: 120px;
+
+  @media (max-width: 480px) {
+
+  /* Header */
+    .headerContainer {
+      padding: 100px 25px;
+    }
+
+    .headerContainer h1 {
+      font-size: 3.3rem;
+    }
+
+    .gameButton {
+      font-size: 1.8rem;
+    }
+
+  /* New Games */ 
+
+  .formSection {
+    padding: 60px 20px;
   }
 
-  .madeBy {
-    bottom: 50px;
+  .arrowContainer,
+  .selectCategory,
+  .inputForm {
+    width: 100%;
   }
 
-  p.madeBy {
-    font-size: 0.8rem;
-  }
+  /* Saved Games */
+    .cassetteDiv {
+      min-height: 200px;
+    }
+    
+    .linkToGame a {
+      min-height: 120px;
+    }
 
-  .cassetteText h4,
-  .cassetteText p {
-    font-size: 0.8rem;
-  }
+    .madeBy {
+      bottom: 50px;
+    }
 
-}
+    p.madeBy {
+      font-size: 0.8rem;
+    }
+
+    .cassetteText h4,
+    .cassetteText p {
+      font-size: 0.8rem;
+    }
+
+  }
 
 
 
