@@ -8,6 +8,7 @@ import SavedGames from './SavedGames';
 import NewGameForm from './NewGameForm';
 import Footer from './Footer';
 import CurrentGame from './CurrentGame';
+import ErrorPage from './ErrorPage';
 import claps from '../assets/claps_final.mp3';
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
         <Route path='/newgame' element={<NewGameForm categoriesData={categories} setResults={setResults} results={results}/>}/>
         <Route path='/savedgames' element={ <SavedGames />}/>
         <Route path='/currentGame/:gameId' element={<CurrentGame volumeClicked={volumeClicked} setVolumeClicked={setVolumeClicked} clappingSound={clappingSound} isMuted={isMuted} updateVolume={updateVolume}/>}/>
+        <Route path='/*' element={<ErrorPage/>}/>
       </Routes>
       <Footer/>
 

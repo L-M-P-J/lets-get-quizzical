@@ -921,6 +921,25 @@ p.madeBy {
   letter-spacing: 3px;
 }
 
+/* Error Page Styles */
+
+.errorSection {
+  min-height: 90vh;
+}
+
+.errorContainer {
+  background-color:rgb(129, 58, 170);
+  margin-top: 150px;
+  margin-bottom: 200px;
+  border-radius: 15px;
+  padding: 100px;
+  text-align: center;
+}
+
+.errorContainer h2 {
+  margin-bottom: 30px;
+}
+
 /* Footer Styles */
 
 footer {
