@@ -67,21 +67,21 @@ const NewGameForm = (props) => {
                 <input className="inputForm" type="text" id="gameName" placeholder="Name your game!" onChange={handleNameChange} required/>
 
                 <div className='arrowContainer'>
-                <i className="fa-solid fa-caret-down"></i>
-                <label className="sr-only" htmlFor="category">Select Category: </label>
-                <select className="selectCategory" name="category" id="category" onChange={handleCategoryChange}>
-                    <option value disabled selected>Select a category</option>
-                    {
-                        categoriesData.map((category) => {
-                            return(
-                                <option value={category.id} key={category.id}>{category.name}</option>
-                            )
-                        })
-                    }
-                </select>
+                    <i className="fa-solid fa-caret-down"></i>
+                    <label className="sr-only" htmlFor="category">Select Category: </label>
+                    <select className="selectCategory" name="category" id="category" onChange={handleCategoryChange}>
+                        <option value disabled selected>Select a category</option>
+                        {
+                            categoriesData.map((category) => {
+                                return(
+                                    <option value={category.id} key={category.id}>{category.name}</option>
+                                )
+                            })
+                        }
+                    </select>
                 </div>
                 
-                <div>
+                <div className="numberOfQuestionContainer">
                     <label className="selectNumber" htmlFor="questionNumber">Select number of questions:</label>
                     <input
                     className="numOfQuestions"
