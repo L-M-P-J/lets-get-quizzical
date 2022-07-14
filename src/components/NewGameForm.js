@@ -64,24 +64,10 @@ const NewGameForm = (props) => {
                 <input className="inputForm" type="text" id="gameName" placeholder="Name your game!" onChange={handleNameChange} required/>
 
                 <div className='arrowContainer'>
-<<<<<<< HEAD:src/NewGameForm.js
-                    <i className="fa-solid fa-caret-down"></i>
-                    <label className="sr-only" htmlFor="category">Select Category: </label>
-                    <select className="selectCategory" name="category" id="category" onChange={handleCategoryChange}>
-                        <option value disabled selected>Select a category</option>
-                        {
-                            categoriesData.map((category) => {
-                                return(
-                                    <option value={category.id} key={category.id}>{category.name}</option>
-                                )
-                            })
-                        }
-                    </select>
-=======
                 <i className="fa-solid fa-caret-down"></i>
                 <label className="sr-only" htmlFor="category">Select Category: </label>
                 <select className="selectCategory" name="category" id="category" onChange={handleCategoryChange}>
-                    <option value disabled defaultValue>Select a category</option>
+                    <option value disabled selected>Select a category</option>
                     {
                         categoriesData.map((category) => {
                             return(
@@ -90,7 +76,6 @@ const NewGameForm = (props) => {
                         })
                     }
                 </select>
->>>>>>> 1bb343f10ff1ed6371d5f7ccd0979e4918be10d0:src/components/NewGameForm.js
                 </div>
                 
                 <div className="numberOfQuestionContainer">
