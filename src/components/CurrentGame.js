@@ -22,6 +22,7 @@ const CurrentGame = (props) => {
     const [resultsData, setResultsData] = useState([]);
     const [ isClicked, setIsClicked ] = useState(false);
     const [ isModalOn, setIsModalOn ] = useState(false);
+    const [modalCounter, setModalCounter] = useState(0);
 
     const handleUserInput0 = () => {
         setChecked0(!checked0);
@@ -175,7 +176,7 @@ const CurrentGame = (props) => {
                         </fieldset>
                     </form>
                 : <EndOfGame score={score} resultsData={resultsData} decodeText={decodeText}/>}
-                {isModalOn ? <Modal setIsModalOn={setIsModalOn} resultsData={resultsData} currentQuestion={currentQuestion} userAnswer={userAnswer} decodeText={decodeText}/> : null}
+                {isModalOn ? <Modal setIsModalOn={setIsModalOn} resultsData={resultsData} currentQuestion={currentQuestion} userAnswer={userAnswer} decodeText={decodeText} modalCounter={modalCounter} setModalCounter={setModalCounter}/> : null}
                 {
                     volumeClicked 
                     ? <div aria-label='toggle volume off' onClick={handleVolumeClick}><i className='fa-solid fa-volume-xmark' aria-hidden='true'></i> <span className='sr-only'>Volume Off</span> </div> 
