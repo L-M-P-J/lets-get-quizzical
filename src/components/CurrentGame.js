@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import firebase from './firebase';
+import firebase from '../firebase';
 import { getDatabase, onValue, ref } from 'firebase/database';
 import EndOfGame from './EndOfGame';
 import Modal from './Modal';

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import firebase from './firebase';
+import firebase from '../firebase';
 import { getDatabase, ref, push, onValue} from 'firebase/database';
 
 const NewGameForm = (props) => {
@@ -53,9 +53,6 @@ const NewGameForm = (props) => {
         });
     }
 
-    console.log(gameId);
-    // console.clear();
-
     return (
         <section className="formSection wrapper">
 
@@ -70,7 +67,7 @@ const NewGameForm = (props) => {
                 <i className="fa-solid fa-caret-down"></i>
                 <label className="sr-only" htmlFor="category">Select Category: </label>
                 <select className="selectCategory" name="category" id="category" onChange={handleCategoryChange}>
-                    <option value disabled selected>Select a category</option>
+                    <option value disabled defaultValue>Select a category</option>
                     {
                         categoriesData.map((category) => {
                             return(

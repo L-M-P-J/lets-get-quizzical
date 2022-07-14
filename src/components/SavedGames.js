@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import firebase from './firebase';
+import firebase from '../firebase';
 import { onValue, getDatabase, ref} from 'firebase/database';
 
 const SavedGames = () => {
@@ -18,7 +18,6 @@ const SavedGames = () => {
                 newArray.push(data[item]);
             }
             setGameList(newArray);
-            console.log(newArray);
         })
     }, [])
 
