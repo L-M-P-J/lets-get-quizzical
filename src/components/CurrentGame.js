@@ -4,12 +4,12 @@ import firebase from '../firebase';
 import { getDatabase, onValue, ref } from 'firebase/database';
 import EndOfGame from './EndOfGame';
 import Modal from './Modal';
-// import claps from '../src/assets/claps_final.mp3';
 
 const CurrentGame = (props) => {
 
-    const {gameId} = useParams();
+    const { volumeClicked, setVolumeClicked, isMuted, clappingSound, updateVolume} = props;
 
+    const {gameId} = useParams();
     const [ currentQuestion, setCurrentQuestion ] = useState(0);
     const [ score, setScore ] = useState(0);
     const [ userAnswer, setUserAnswer ] = useState('');
@@ -22,16 +22,49 @@ const CurrentGame = (props) => {
     const [resultsData, setResultsData] = useState([]);
     const [ isClicked, setIsClicked ] = useState(false);
     const [ isModalOn, setIsModalOn ] = useState(false);
-    // const [ modalQuestion, setModalQuestion] = useState(0);
+
+    const handleUserInput0 = () => {
+        setChecked0(!checked0);
+        setChecked1(false);
+        setChecked2(false);
+        setChecked3(false);
+    }
+    const handleUserInput1 = () => {
+        setChecked1(!checked1);
+        setChecked0(false);
+        setChecked2(false);
+        setChecked3(false);
+    }
+    const handleUserInput2 = () => {
+        setChecked2(!checked2);
+        setChecked1(false);
+        setChecked3(false);
+        setChecked0(false);
+    }
+    const handleUserInput3 = () => {
+        setChecked3(!checked3);
+        setChecked0(false);
+        setChecked1(false);
+        setChecked2(false);
+    }
+    const handleClick = (event) => {
+        setUserAnswer(event.target.value);
+    }
+
+    const handleVolumeClick = () => {
+        setVolumeClicked(!volumeClicked);  
+    }
+
+    useEffect(()=> {
+        updateVolume(volumeClicked);
+    }, [volumeClicked, updateVolume]); 
 
     useEffect( () => {
         const database = getDatabase(firebase);
         const dbRef = ref(database, `/${gameId}`);
         onValue(dbRef, (response) => {
             const data = response.val();
-            
             setResultsData(data);
-
             const answerArray = [...data.gameData[currentQuestion].incorrect_answers];
             const correctAnswer = data.gameData[currentQuestion].correct_answer;
             setCurrentCorrectAns(correctAnswer);
@@ -45,10 +78,8 @@ const CurrentGame = (props) => {
     }, [currentQuestion, gameId])
 
     useEffect(() => {
-
         if (currentQuestion) {
             const answerArray = [...resultsData.gameData[currentQuestion].incorrect_answers];
-
             const correctAnswer = resultsData.gameData[currentQuestion].correct_answer;
             setCurrentCorrectAns(correctAnswer);
 
@@ -58,14 +89,9 @@ const CurrentGame = (props) => {
             }
 
             combineAnswer(answerArray, correctAnswer);
-
             setAllAnswersArray(answerArray);
         }
     }, [currentQuestion, resultsData]);
-
-    //clapping sound effect - Audio is a built in object with different properties, one of them play()
-    // const clappingSound = new Audio(claps);
-    // const clappingSound = null;
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -80,33 +106,13 @@ const CurrentGame = (props) => {
         setChecked3(false);
         if (userAnswer === currentCorrectAns) {
             setScore(score + 1);
-            if (!props.isMuted) {
-                props.clappingSound.play();
+            if (!isMuted) {
+                clappingSound.play();
             }
             
         } else {
             setIsModalOn(true);
         }
-    }
-
-    const handleUserInput0 = () => {
-        setChecked0(!checked0);
-    }
-
-    const handleUserInput1 = () => {
-        setChecked1(!checked1);
-    }
-
-    const handleUserInput2 = () => {
-        setChecked2(!checked2);
-    }
-
-    const handleUserInput3 = () => {
-        setChecked3(!checked3);
-    }
-
-    const handleClick = (event) => {
-        setUserAnswer(event.target.value);
     }
 
     const handleShowScore = () => {
@@ -129,52 +135,55 @@ const CurrentGame = (props) => {
 
     if (resultsData.length < 1) {
         return (
-            <p>Game is loading</p>
+            <section className='currentGameContainer wrapper'>
+                <div className='currentLoadingContainer'>
+                    <p>Loading</p>
+                    <div className='ldsRoller'><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                </div>
+            </section>
         )
     } else {    
         return (
-            <section className="currentGameContainer wrapper">
+            <section className='currentGameContainer wrapper'>
                 {
                     isClicked === false ?                 
-                    
                     <form onSubmit={handleSubmit}>
                         <fieldset>
                             <legend>{decodeText(resultsData.gameData[currentQuestion].question)}</legend>
-
-                                <div className="answerContainer">
-                                    <div className="answer">
+                                <div className='answerContainer'>
+                                    <div className='answer'>
                                         <input className="sr-only" id='option1' onClick={handleClick} onChange={handleUserInput0} type='radio' name='answer' value={allAnswersArray[0]} checked={checked0} required></input>
-                                        <label htmlFor='option1'>{decodeText(allAnswersArray[0])}</label>
+                                        <label className={checked0 ? 'answerChecked' : null} htmlFor='option1'>{decodeText(allAnswersArray[0])}</label>
                                     </div>
-
-                                    <div className="answer">
-                                        <input className="sr-only" id='option2' onClick={handleClick} onChange={handleUserInput1} type='radio' name='answer' value={allAnswersArray[1]} checked={checked1} required></input>
-                                        <label htmlFor='option2'>{decodeText(allAnswersArray[1])}</label>
+                                    <div className='answer'>
+                                        <input className='sr-only' id='option2' onClick={handleClick} onChange={handleUserInput1} type='radio' name='answer' value={allAnswersArray[1]} checked={checked1} required></input>
+                                        <label className={checked1 ? 'answerChecked' : 'answerNotChecked'}  htmlFor='option2'>{decodeText(allAnswersArray[1])}</label>
                                     </div>
-
-                                    <div className="answer">
-                                        <input className="sr-only" id='option3' onClick={handleClick} onChange={handleUserInput2} type='radio' name='answer' value={allAnswersArray[2]} checked={checked2} required></input>
-                                        <label htmlFor='option3'>{decodeText(allAnswersArray[2])}</label>
+                                    <div className='answer'>
+                                        <input className='sr-only' id='option3' onClick={handleClick} onChange={handleUserInput2} type='radio' name='answer' value={allAnswersArray[2]} checked={checked2} required></input>
+                                        <label className={checked2 ? 'answerChecked' : 'answerNotChecked'}  htmlFor='option3'>{decodeText(allAnswersArray[2])}</label>
+                                    </div>            
+                                    <div className='answer'>
+                                        <input className='sr-only' id='option4' onClick={handleClick} onChange={handleUserInput3} type='radio' name='answer' value={allAnswersArray[3]} checked={checked3} required></input>
+                                        <label className={checked3 ? 'answerChecked' : 'answerNotChecked'}  htmlFor='option4'>{decodeText(allAnswersArray[3])}</label>
                                     </div>
-                                    
-                                    <div className="answer">
-                                        <input className="sr-only" id='option4' onClick={handleClick} onChange={handleUserInput3} type='radio' name='answer' value={allAnswersArray[3]} checked={checked3} required></input>
-                                        <label htmlFor='option4'>{decodeText(allAnswersArray[3])}</label>
-                                    </div>
-
-                                {
-                                    resultsData.gameData.length - 1 === currentQuestion ? <button className="currentGameButton" onClick={ handleShowScore }>Finish</button>
-                                    : <button className="currentGameButton" type='submit' >Next Question</button>
-                                }
+                                    {
+                                        resultsData.gameData.length - 1 === currentQuestion ? <button className='currentGameButton' onClick={ handleShowScore }>Finish</button>
+                                        : <button className='currentGameButton' type='submit' >Next Question</button>
+                                    }
                                 </div>
                         </fieldset>
                     </form>
                 : <EndOfGame score={score} resultsData={resultsData} decodeText={decodeText}/>}
                 {isModalOn ? <Modal setIsModalOn={setIsModalOn} resultsData={resultsData} currentQuestion={currentQuestion} userAnswer={userAnswer} decodeText={decodeText}/> : null}
+                {
+                    volumeClicked 
+                    ? <div aria-label='toggle volume off' onClick={handleVolumeClick}><i className='fa-solid fa-volume-xmark' aria-hidden='true'></i> <span className='sr-only'>Volume Off</span> </div> 
+                    : <div aria-label='toggle volume on' onClick={handleVolumeClick}><i className='fa-solid fa-volume-high' aria-hidden='true'></i> <span className='sr-only'>Volume On</span> </div>
+                }
             </section>
         )
     }
-    
 }
 
 export default CurrentGame;

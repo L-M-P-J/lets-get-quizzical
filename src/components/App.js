@@ -10,29 +10,19 @@ import Footer from './Footer';
 import CurrentGame from './CurrentGame';
 import claps from '../assets/claps_final.mp3';
 
-
-// NEXT STEPS:
-
-//if user refreshes current game  >goes back to question 1 (ok w/e)
-// Make an END component for the game after the last question (logic using < .length of the array)
-    //when the user reaches the last question (last index of the questions array) use ternary to show an end-game component -> show score, go back home etc.
-// Saved Games - display firebase data on the page
-    //access firebase database, for each game in firebase, .map and return a list item which shows the gameName, category, and number of questions.
-
 function App() {
 
   const [ categories, setCategories ] = useState([]);
   const [results, setResults] = useState([]);
   const [ isMuted , setIsMuted ] = useState(false);
+  const [volumeClicked, setVolumeClicked] = useState(false);
 
-  //clapping sound effect - Audio is a built in object with different properties, one of them play()
   const clappingSound = new Audio(claps);
 
   const updateVolume = (volume) => {
     setIsMuted(volume);
   }
   
-
   useEffect( () => {
     axios({
       url: 'https://opentdb.com/api_category.php',
@@ -49,10 +39,10 @@ function App() {
     <div className="App">
   
       <Routes>
-        <Route path="/" element={<Header updateVolume={updateVolume}/>}/>
-        <Route path="/newgame" element={<NewGameForm categoriesData={categories} setResults={setResults} results={results}/>}/>
-        <Route path="/savedgames" element={ <SavedGames />}/>
-        <Route path="/currentGame/:gameId" element={<CurrentGame clappingSound={clappingSound} isMuted={isMuted}/>}/>
+        <Route path='/' element={<Header updateVolume={updateVolume} volumeClicked={volumeClicked} setVolumeClicked={setVolumeClicked}/>}/>
+        <Route path='/newgame' element={<NewGameForm categoriesData={categories} setResults={setResults} results={results}/>}/>
+        <Route path='/savedgames' element={ <SavedGames />}/>
+        <Route path='/currentGame/:gameId' element={<CurrentGame volumeClicked={volumeClicked} setVolumeClicked={setVolumeClicked} clappingSound={clappingSound} isMuted={isMuted} updateVolume={updateVolume}/>}/>
       </Routes>
       <Footer/>
 
@@ -61,15 +51,3 @@ function App() {
 }
 
 export default App;
-
-/*
-
-  TO-DO FOR TONIGHT
-
-    1. Modal & Google Chrome Issue - Lester
-    2. Research for replacing regex, audio - Pau
-    3. Current Games - Joey
-    4. Saved Games - Mel
-
-
-*/
