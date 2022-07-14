@@ -7,9 +7,9 @@ import Modal from './Modal';
 
 const CurrentGame = (props) => {
 
-    const { volumeClicked, setVolumeClicked, isMuted, clappingSound, updateVolume} = props;
+    const { volumeClicked, setVolumeClicked, isMuted, clappingSound, updateVolume } = props;
 
-    const {gameId} = useParams();
+    const { gameId } = useParams();
     const [ currentQuestion, setCurrentQuestion ] = useState(0);
     const [ score, setScore ] = useState(0);
     const [ userAnswer, setUserAnswer ] = useState('');
@@ -17,12 +17,12 @@ const CurrentGame = (props) => {
     const [ checked1, setChecked1 ] = useState(false);
     const [ checked2, setChecked2 ] = useState(false);
     const [ checked3, setChecked3 ] = useState(false);
-    const [allAnswersArray, setAllAnswersArray] = useState([]);
-    const [currentCorrectAns, setCurrentCorrectAns] = useState('');
-    const [resultsData, setResultsData] = useState([]);
+    const [ allAnswersArray, setAllAnswersArray ] = useState([]);
+    const [ currentCorrectAns, setCurrentCorrectAns ] = useState('');
+    const [ resultsData, setResultsData ] = useState([]);
     const [ isClicked, setIsClicked ] = useState(false);
     const [ isModalOn, setIsModalOn ] = useState(false);
-    const [modalCounter, setModalCounter] = useState(0);
+    const [ modalCounter, setModalCounter ] = useState(0);
 
     const handleUserInput0 = () => {
         setChecked0(!checked0);

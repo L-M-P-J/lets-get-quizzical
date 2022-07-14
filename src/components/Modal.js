@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 
 const Modal = (props) => {
-    const {setIsModalOn, resultsData, userAnswer, decodeText, currentQuestion, modalCounter, setModalCounter } = props;
 
-    const [modalQuestionNum, setModalQuestionNum] = useState(0);
+    const { setIsModalOn, resultsData, userAnswer, decodeText, currentQuestion, modalCounter, setModalCounter } = props;
+
+    const [ modalQuestionNum, setModalQuestionNum ] = useState(0);
     
     const secondLastQuestion = resultsData.gameData.length - 1;
     
@@ -22,6 +23,8 @@ const Modal = (props) => {
         }
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+    //the eslint-diable-line comment above is 'commented out' on purpose, and it must stay on the same line as the end of the useEffect - this is part of the functionality.
+
     return(
         <div className='modal'>  
             <div className='modalContainer'>
@@ -33,7 +36,7 @@ const Modal = (props) => {
                 </div>
                 <h3>Nice Try!</h3>
                 <div className='modalText'>
-                    <div><span className='correct-answer'>Correct Answer:</span> <p>{decodeText(resultsData.gameData[modalQuestionNum].correct_answer)}</p></div>
+                    <div><span className='correctAnswer'>Correct Answer:</span> <p>{decodeText(resultsData.gameData[modalQuestionNum].correct_answer)}</p></div>
                     <div className='yourAnswerParagraph'><span className='yourAnswer'>Your Answer:</span><p>{decodeText(userAnswer)}</p></div>
                 </div>
                 <button onClick={handleClick} className='exitModal currentGameButton'>Continue</button>

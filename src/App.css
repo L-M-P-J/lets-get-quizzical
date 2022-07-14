@@ -609,7 +609,7 @@ label.answerNotChecked {
   color: black;
 }
 
-.correct-answer {
+.correctAnswer {
   color: green;
   margin-right: 10px;
 }

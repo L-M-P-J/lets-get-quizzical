@@ -1,4 +1,5 @@
 const Footer = () => {
+    
     return (
         <footer>
             <div className='wrapper'>

@@ -13,9 +13,9 @@ import claps from '../assets/claps_final.mp3';
 function App() {
 
   const [ categories, setCategories ] = useState([]);
-  const [results, setResults] = useState([]);
+  const [ results, setResults ] = useState([]);
   const [ isMuted , setIsMuted ] = useState(false);
-  const [volumeClicked, setVolumeClicked] = useState(false);
+  const [ volumeClicked, setVolumeClicked ] = useState(false);
 
   const clappingSound = new Audio(claps);
 
