@@ -1,5 +1,5 @@
 
-import './App.css'; 
+import '../App.css'; 
 import { Routes, Route} from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -8,7 +8,7 @@ import SavedGames from './SavedGames';
 import NewGameForm from './NewGameForm';
 import Footer from './Footer';
 import CurrentGame from './CurrentGame';
-import claps from '../src/assets/claps_final.mp3';
+import claps from '../assets/claps_final.mp3';
 
 
 // NEXT STEPS:
@@ -29,7 +29,6 @@ function App() {
   const clappingSound = new Audio(claps);
 
   const updateVolume = (volume) => {
-    console.log(volume);
     setIsMuted(volume);
   }
   
@@ -43,8 +42,6 @@ function App() {
       const originalCategories = response.data.trivia_categories;
       const slicedCategories = originalCategories.slice(1, originalCategories.length);
       setCategories(slicedCategories);
-      console.log(categories);
-      console.log(slicedCategories);
     });
   }, []);
 

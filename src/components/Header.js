@@ -13,7 +13,7 @@ const Header = (props) => {
 
     useEffect(()=> {
             props.updateVolume(volumeClicked);
-    }, [volumeClicked]) 
+    }, [volumeClicked, props]); 
 
     return (
         <header>

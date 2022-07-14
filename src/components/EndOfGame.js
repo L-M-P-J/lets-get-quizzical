@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 const EndOfGame = (props) => {
     const { score, resultsData } = props;
-    console.log(resultsData.gameData);
     return (
         <div className="endContainer">
             <p>Quizzical Is Over!</p> 
