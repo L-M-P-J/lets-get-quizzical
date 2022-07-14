@@ -4,7 +4,7 @@ import firebase from './firebase';
 import { getDatabase, onValue, ref } from 'firebase/database';
 import EndOfGame from './EndOfGame';
 import Modal from './Modal';
-import claps from '../src/assets/claps_final.mp3';
+// import claps from '../src/assets/claps_final.mp3';
 
 const CurrentGame = (props) => {
 
@@ -80,7 +80,10 @@ const CurrentGame = (props) => {
         setChecked3(false);
         if (userAnswer === currentCorrectAns) {
             setScore(score + 1);
-            props.clappingSound.play();
+            if (!props.isMuted) {
+                props.clappingSound.play();
+            }
+            
         } else {
             setIsModalOn(true);
         }

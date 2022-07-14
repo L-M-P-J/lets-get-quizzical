@@ -1,13 +1,19 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const Header = () => {
+const Header = (props) => {
 
     const [volumeClicked, setVolumeClicked] = useState(false);
+   
+    
 
     const handleClick = () => {
-        setVolumeClicked(!volumeClicked);
+        setVolumeClicked(!volumeClicked);   
     }
+
+    useEffect(()=> {
+            props.updateVolume(volumeClicked);
+    }, [volumeClicked]) 
 
     return (
         <header>

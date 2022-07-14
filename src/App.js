@@ -10,6 +10,7 @@ import Footer from './Footer';
 import CurrentGame from './CurrentGame';
 import claps from '../src/assets/claps_final.mp3';
 
+
 // NEXT STEPS:
 
 //if user refreshes current game  >goes back to question 1 (ok w/e)
@@ -22,9 +23,16 @@ function App() {
 
   const [ categories, setCategories ] = useState([]);
   const [results, setResults] = useState([]);
+  const [ isMuted , setIsMuted ] = useState(false);
 
   //clapping sound effect - Audio is a built in object with different properties, one of them play()
   const clappingSound = new Audio(claps);
+
+  const updateVolume = (volume) => {
+    console.log(volume);
+    setIsMuted(volume);
+  }
+  
 
   useEffect( () => {
     axios({
@@ -44,10 +52,10 @@ function App() {
     <div className="App">
   
       <Routes>
-        <Route path="/" element={<Header />}/>
+        <Route path="/" element={<Header updateVolume={updateVolume}/>}/>
         <Route path="/newgame" element={<NewGameForm categoriesData={categories} setResults={setResults} results={results}/>}/>
         <Route path="/savedgames" element={ <SavedGames />}/>
-        <Route path="/currentGame/:gameId" element={<CurrentGame clappingSound={clappingSound}/>}/>
+        <Route path="/currentGame/:gameId" element={<CurrentGame clappingSound={clappingSound} isMuted={isMuted}/>}/>
       </Routes>
       <Footer/>
 
