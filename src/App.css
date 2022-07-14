@@ -244,7 +244,7 @@ html {
 body {
   font-family: "Lato", sans-serif;
   color: #ffffff;
-  background-image: url("background-image.jpg");
+  background-image: url("././assets/background-image.jpg");
   animation: backgroundAnimation 100s linear infinite;
   height: 100vh;
 }
@@ -411,6 +411,14 @@ header {
   justify-content: center;
   align-items: center;
   position: relative;
+  flex-direction: column;
+}
+
+.categoryTitle {
+  font-size: 1.5rem;
+  border-bottom: 2px solid white;
+  margin-bottom: 25px;
+  text-align: center;
 }
 
 fieldset {
@@ -473,9 +481,12 @@ label.answerNotChecked {
 
 .currentLoadingContainer {
   background-color: #07c3c7;
-  display: inline-block;
   padding: 20px;
   border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .currentLoadingContainer p {
