@@ -865,7 +865,7 @@ footer a {
 /* Saved Games Styles */
 
 .savedGamesContainer {
-  background-color: #e986b8;
+  background-color: #813aaa;
   border-radius: 15px;
 }
 
@@ -880,14 +880,17 @@ footer a {
 }
 
 .savedGames h2 {
+  color: white;
   font-size: 4rem;
   margin-top: 40px;
   padding-top: 20px;
 }
 
 .savedGames h3 {
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   padding-bottom: 40px;
+  color: white;
+  margin-top: 5px;
 }
 
 .savedGamesList {
@@ -900,7 +903,7 @@ footer a {
 
 .cassette {
   margin: 30px;
-  min-width: 1000px;
+  width: 500px;
   position: relative;
 }
 
@@ -933,7 +936,6 @@ p.madeBy {
 .linkToGame {
   position: absolute;
   max-height: 100%;
-  min-height: 200px;
   right: 0;
   left: 0;
   top: 20px;
@@ -1015,6 +1017,11 @@ p.madeBy {
     }
 
   /* Saved Games */
+
+    .savedGames h3 {
+      font-size: 1.4rem;
+    }
+  
     .tightWrapper {
       width: 90%;
     }
@@ -1026,6 +1033,27 @@ p.madeBy {
 
     .selectNumber {
       margin-right: 0px;
+    }
+
+    .cassetteDiv {
+      min-height: 200px;
+    }
+  
+    .linkToGame a {
+      min-height: 120px;
+    }
+  
+    .madeBy {
+      bottom: 50px;
+    }
+  
+    p.madeBy {
+      font-size: 0.8rem;
+    }
+  
+    .cassetteText h4,
+    .cassetteText p {
+      font-size: 0.8rem;
     }
 
   }
@@ -1058,28 +1086,23 @@ p.madeBy {
   }
 
   /* Saved Games */
-    .cassetteDiv {
-      min-height: 200px;
-    }
-    
-    .linkToGame a {
-      min-height: 120px;
-    }
 
-    .madeBy {
-      bottom: 50px;
-    }
-
-    p.madeBy {
-      font-size: 0.8rem;
-    }
-
-    .cassetteText h4,
-    .cassetteText p {
-      font-size: 0.8rem;
-    }
-
+  .cassette {
+    margin: 0;
+    width: 300px;
+    position: relative;
   }
+
+  .cassetteText h4 {
+    max-width: 90%;
+    margin-top: 3px;
+  }
+
+  p.madeBy {
+    bottom: 60px;
+  }
+
+}
 
 
 
