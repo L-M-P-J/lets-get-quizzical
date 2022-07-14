@@ -5,20 +5,22 @@ const Modal = (props) => {
 
     const [modalQuestionNum, setModalQuestionNum] = useState(0);
     
+    const secondLastQuestion = resultsData.gameData.length - 1;
+    
     const handleClick = () => {
         setIsModalOn(false);
     }
     
     useEffect( () => {
-        if (resultsData.gameData.length - 1 > currentQuestion) {
+        if (secondLastQuestion > currentQuestion) {
             setModalQuestionNum(currentQuestion - 1);
-        } else if (resultsData.gameData.length - 1 === currentQuestion && modalCounter === 1) {
-            setModalQuestionNum(resultsData.gameData.length - 1);
-        } else if (resultsData.gameData.length - 1 === currentQuestion) {
+        } else if (secondLastQuestion === currentQuestion && modalCounter === 1) {
+            setModalQuestionNum(secondLastQuestion);
+        } else if (secondLastQuestion === currentQuestion) {
             setModalCounter(modalCounter + 1);
             setModalQuestionNum(currentQuestion - 1);
         }
-    }, [resultsData.gameData.length, currentQuestion, modalCounter, setModalCounter])
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return(
         <div className='modal'>  
