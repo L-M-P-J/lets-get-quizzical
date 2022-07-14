@@ -55,13 +55,10 @@ const NewGameForm = (props) => {
 
     return (
         <section className='formSection wrapper'>
-
             <h2>Are you Ready To Get Quizzical?!</h2>
-            
             <form className='gameForm' action='' onSubmit={handleSubmit}>
-
                 <label className='sr-only' htmlFor='gameName'>Name your game!</label>
-                <input className='inputForm' type="text" id='gameName' placeholder='Name your game!' onChange={handleNameChange} required/>
+                <input className='inputForm' type='text' id='gameName' placeholder='Name your game!' onChange={handleNameChange} required/>
                 <div className='arrowContainer'>
                     <i className='fa-solid fa-caret-down'></i>
                     <label className='sr-only' htmlFor='category'>Select Category: </label>
@@ -94,7 +91,6 @@ const NewGameForm = (props) => {
                 <button className='submitGame' type='submit'><span>Let's Play!</span></button>
             </form>
             <Link to='/'><i className='fa-solid fa-arrow-left'></i></Link>
-
         </section>
     )
 }

@@ -23,7 +23,7 @@ const SavedGames = () => {
 
     return (
         <section className='tightWrapper savedGames'>
-            <Link to='/' className='currentGameButton savedGamesButton'>Make a new game</Link>
+            <Link to='/' className='currentGameButton savedGamesButton'>Back to main page</Link>
             <div className='savedGamesContainer'>
                 <h2>Saved Games</h2>
                 <h3>Click on a game to re-play!</h3>

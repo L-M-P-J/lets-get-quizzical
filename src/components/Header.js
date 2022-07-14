@@ -1,17 +1,17 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const Header = (props) => {
 
-    const [volumeClicked, setVolumeClicked] = useState(false);
+    const { updateVolume, setVolumeClicked, volumeClicked } = props;
 
-    const handleClick = () => {
-        setVolumeClicked(!volumeClicked);   
+    const handleVolumeClick = () => {
+        setVolumeClicked(!volumeClicked);  
     }
 
     useEffect(()=> {
-            props.updateVolume(volumeClicked);
-    }, [volumeClicked, props]); 
+        updateVolume(volumeClicked);
+    }, [volumeClicked, updateVolume]); 
 
     return (
         <header>
@@ -25,8 +25,8 @@ const Header = (props) => {
 
                     {
                         volumeClicked 
-                        ? <div aria-label='toggle volume off' onClick={handleClick}><i className='fa-solid fa-volume-xmark' aria-hidden='true'></i> <span className='sr-only'>Volume Off</span> </div> 
-                        : <div aria-label='toggle volume on' onClick={handleClick}><i className='fa-solid fa-volume-high' aria-hidden='true'></i> <span className='sr-only'>Volume On</span> </div>
+                        ? <div aria-label='toggle volume off' onClick={handleVolumeClick}><i className='fa-solid fa-volume-xmark' aria-hidden='true'></i> <span className='sr-only'>Volume Off</span> </div> 
+                        : <div aria-label='toggle volume on' onClick={handleVolumeClick}><i className='fa-solid fa-volume-high' aria-hidden='true'></i> <span className='sr-only'>Volume On</span> </div>
                     }
                     
                 </div>

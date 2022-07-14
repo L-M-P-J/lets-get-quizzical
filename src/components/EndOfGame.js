@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-// import uuid from 'react-uuid';
 
 const EndOfGame = (props) => {
     const { score, resultsData } = props;
@@ -11,7 +10,6 @@ const EndOfGame = (props) => {
                 <p>{score} out of {resultsData.gameData.length}</p>
                 <p>Thanks for playing!</p>
                 <Link to="/"><button className="currentGameButton">New Game</button></Link>
-
             </div>
         </div>
     )
