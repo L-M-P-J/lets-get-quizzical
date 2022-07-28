@@ -2,7 +2,7 @@
 # Let's Get Quizzical
 
 
-Let's Get Quizzical is an interactive trivia pursuit-like application created using React and Firebase. This application stores all past games on the Firebase Realtime Database to allow users to replay old games. This application was created with a team of 3 other developers, and fully planned using tools such as Figma & Trello.
+Let's Get Quizzical is an interactive trivia pursuit-like application created using React and Firebase. This application stores all past games on the Firebase Realtime Database to allow users to replay old games.
 
 
 
