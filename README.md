@@ -1,8 +1,8 @@
 
-# Oat & Honey
+# Let's Get Quizzical
 
 
-Oat & Honey is a self-care e-commerce website created using React and Firebase. This user interface automatically updates the product section when new products are added by utilizing the Etsy API. In addition, by using the VatComply API to pull live exchange rate information, users are ensured that they are paying the correct price when the currencies are converted.
+Let's Get Quizzical is an interactive trivia pursuit-like application created using React and Firebase. This application stores all past games on the Firebase Realtime Database to allow users to replay old games. This application was created with a team of 3 other developers, and fully planned using tools such as Figma & Trello.
 
 
 
