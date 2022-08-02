@@ -26,14 +26,6 @@ Let's Get Quizzical is an interactive trivia pursuit-like application created us
 - [UUID](https://www.npmjs.com/package/uuid)
 - [React Router DOM](https://www.npmjs.com/package/react-router-dom)
 
-## Tech Stack
-
-- HTML5
-- CSS3
-- JavaScript
-- React
-- Firebase (Realtime Database)
-
 ## Setup
 
 Clone the project
